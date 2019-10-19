@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Track the world's most popular football competitions, matches, teams and players",
   "main": "app.js",
+  "engines": {
+    "node": "8.10.0",
+    "npm": "6.11.3"
+  },
   "scripts": {
     "dev": "webpack --mode development",
     "start-dev": "webpack-dev-server --mode development --open",
