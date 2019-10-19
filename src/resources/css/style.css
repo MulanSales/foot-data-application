@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:300,400,500|Varela+Round&display=swap&subset=hebrew');
+
+/*-----------------------------------------------/
+/ GENERAL
+/----------------------------------------------*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fff;
+    color: #555;
+    font-family: 'Rajdhani', sans-serif, Arial;
+    font-size: 20px;
+    font-weight: 400;
+    text-rendering: optimizeLegibility;
+}
+
+section {
+    padding-top: 25px;
+    padding-bottom: 50px;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.section__title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #180404;
+}
+
+.section__title i {
+    font-size: 180%;
+}
+
+h1 {
+    font-size: 200%;
+    word-spacing: 1px;
+    letter-spacing: 1px;
+}
+
+h2 {
+    font-size: 180%;
+    word-spacing: 1px;
+    letter-spacing: 1px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+h2:after {
+    display: block;
+    background-color: #e71515;
+    height: 2px;
+    content: " ";
+    width: 150px;
+    margin: 10px auto;
+}
+
+p {
+    font-size: 100%;
+    font-weight: 300;
+    padding: 5px 10px;
+    color: #180404;
+}

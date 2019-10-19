@@ -1,0 +1,202 @@
+/***
+* MAIN PAGE CSS ELEMENTS
+*/
+
+/*-----------------------------------------------/
+/ HEADER COMPONENTS
+/----------------------------------------------*/
+
+header {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.801), rgba(0, 0, 0, 0.767)), url('../img/back-2.jpg');
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Nav bar components */
+
+.main__nav {
+    display: flex;
+    align-items: center;
+}
+
+.main__nav__logo {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.main__nav__logo img {
+    padding: 0 15px;
+    width: 200px;
+    height: auto;
+}
+
+.main__nav__items {
+    list-style: none;
+    display: flex;
+    margin-top: 10px;
+}
+
+.main__nav__items li {
+    margin-left: 20px;
+    font-size: 105%;
+    text-transform: uppercase;
+}
+
+.main__nav__items li:last-child {
+    margin-right: 40px;
+}
+
+.main__nav__items li a:link,
+.main__nav__items li a:visited {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 25px;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.3s;
+}
+
+.main__nav__items li a:hover,
+.main__nav__items li a:active {
+    border-bottom: 2px solid #b60202f3;
+}
+
+/* Main page components */
+.main__page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+}
+
+.main__page__text {
+    color: #fff;
+    width: 60%;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.main__page__form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 150px;
+}
+
+.main__page__form input {
+    width: 400px;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-family: inherit;
+    font-size: 90%;
+    font-weight: 100;
+}
+
+.search__btn {
+    font-size: 80%;
+    font-weight: 300;
+    margin-left: -30px;
+    border-radius: 10px;
+    padding: 5px 20px;
+    background: linear-gradient(to right, #e71515, #180404);
+    border: 1px solid #b60202f3;
+    cursor: pointer;
+    z-index: 1;
+    color: #fff;
+}
+
+.search__btn i:hover {
+    color: rgb(92, 91, 91);
+}
+
+/*-----------------------------------------------/
+/ HOW IT WORKS 
+/----------------------------------------------*/
+
+.works__section {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(248, 242, 242);
+    align-items: center;
+}
+
+.works__content {
+    display: flex;
+    margin-top: 80px;
+    align-items: center;
+}
+
+.works__content__div {
+    display: flex;
+    flex-direction: row;
+    margin-right: 100px;
+}
+
+.works__content__div div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.works__content__div div i {
+    padding: 5px 10px;
+    font-size: 250%;
+    color: #e71515;
+}
+
+.works__content__div div p {
+    width: 100%;
+    color: #180404;
+}
+
+.works__content img {
+    width: auto;
+    height: 300px;
+}
+
+/*-----------------------------------------------/
+/ WORLD COMPETITIONS
+/----------------------------------------------*/
+
+.world__comps__main__div {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.world__comps__content {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.world__comps__content img {
+    width: 70%;
+    padding: 40px 0;
+}
+
+.world__comps__content i {
+    position: absolute;
+    z-index: 1;
+    color: #e71515;
+    font-size: 150%;
+}
+
+.world__comps__content i:nth-of-type(1) {
+    top: 32%;
+}
+
+.world__comps__content i:nth-of-type(2) {
+    top: 34%;
+    right: 70%;
+}
+
+.world__comps__text {
+    padding-top: 30px;
+    font-size: 150%;
+    font-weight: 300;
+}
