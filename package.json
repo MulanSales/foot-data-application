@@ -5,7 +5,6 @@
   "main": "app.js",
   "scripts": {
     "dev": "webpack --mode development",
-    //"build": "webpack --mode production",
     "start-dev": "webpack-dev-server --mode development --open",
     "start": "node app.js"
   },
