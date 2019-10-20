@@ -6,7 +6,10 @@ import queriesCss from './css/queries.css';
 
 import logoImage from '../../resources/img/logo.png';
 import playerImage from '../../resources/img/player.png';
-import worldMapImage from '../../resources/img/world-map.png'
+import worldMapImage from '../../resources/img/world-map.png';
+import cr7Image from './img/cr7.jpg';
+
+import '../../vendors/js/noframework.waypoints';
 
 const $ = document;
 
@@ -25,9 +28,11 @@ export const MainPage = class extends Component {
         this.createHeader(body);
         this.createSection(body, 'How it Works', 'works__section', this.createWorksContent);
         this.createSection(body, 'World Competitions', 'world__comps__section', this.createWorldCompetitionsContent);
-        this.createSection(body, 'Player Details', 'players__details__section', (param) => {return;});
+        this.createSection(body, 'Player Details', 'players__details__section', this.createPlayerDetailsContent);
         this.createSection(body, 'About', 'about__section', (param) => {return;});
         this.createFooter(body);
+
+        this.animate();
     }
 
     /**
@@ -169,6 +174,7 @@ export const MainPage = class extends Component {
         });
 
         const div_works_content_img = this.createElement('img', {
+            class: 'works__content__img',
             src: `${playerImage}`,
             alt: 'Football Player Art'
         });
@@ -227,6 +233,19 @@ export const MainPage = class extends Component {
             alt: 'World Map Figure'
         });
 
+        const worlds_comps_content_text = this.createElement('div', {
+            class: 'world__comps__content__text'
+        });
+
+        const worlds_comps_content_text_p = this.createElement('p', {
+            innerHTML: 'Explore all the areas, competitions and players around the globe!'
+        });
+
+        this.createRelationship(
+            worlds_comps_content_text,
+            RelationType.PARENTOF,
+            [worlds_comps_content_text_p]
+        );
 
         this.createRelationship(
             worlds_comps_content,
@@ -234,10 +253,12 @@ export const MainPage = class extends Component {
             [worlds_comps_content_img]
         );
 
-        const trophiesCount = 2;
+        const trophiesCount = 6;
+        const competitions = [ "UEFA Champions League", "Canadian Championship", "J.League Cup", "Copa do Brasil", "WC Qualification", "A League"]
         for (let i = 0; i < trophiesCount; i++) {
             const worlds_comps_content_i = this.createElement('i', {
-                class: 'ion-trophy'
+                class: `ion-trophy trophy--${i} tooltip`,
+                innerHTML: `<span class="tooltiptext">${competitions[i]}</span>`
             });
 
             this.createRelationship(
@@ -250,7 +271,7 @@ export const MainPage = class extends Component {
         this.createRelationship(
             world_comps_main_div,
             RelationType.PARENTOF,
-            [worlds_comps_content]
+            [worlds_comps_content, worlds_comps_content_text]
         );
 
         this.createRelationship(
@@ -260,10 +281,132 @@ export const MainPage = class extends Component {
         );
     }
 
+    createPlayerDetailsContent(parent) {
+
+        const players_details_main_div = this.createElement('div', {
+            class: 'players__details__main__div'
+        });
+
+        const players_details_main_div_img = this.createElement('img', {
+            class: 'player__details__img',
+            src: `${cr7Image}`,
+            alt: 'Cristiano Ronaldo Image'
+        });
+
+        const players_details_main_text = this.createElement('p', {
+            class: 'players__details__main__text',
+            innerHTML: 'Get full information about your favorite player status on the major leagues'
+        });
+
+        const players_info_div = this.createElement('div', {
+            class: 'players__info__div'
+        });
+
+        const playerInfo = {
+            player: {
+                Name: "Cristiano Ronaldo",
+                DateOfBirth: "1985-02-05",
+                CountryOfBirth: "Portugal",
+                Position: "Attacker",
+                ShirtNumber: 7,
+                LastUpdated: "2019-09-12T02:54:53Z"
+            }
+        }
+
+        for (let [key, value] of Object.entries(playerInfo.player)){
+            const player_info = this.createElement('p', {
+                class: `player__info__${key.toString()}`,
+                innerHTML: `<strong>${key.toString()}</strong>: ${value}`
+            });
+
+            const player_info_icon = this.createElement('i', {
+                class: 'ion-android-radio-button-on'
+            });
+
+            const player_info_internal_div = this.createElement('div', {
+                class: 'player__info__internal'
+            });
+
+            this.createRelationship(
+                player_info_internal_div,
+                RelationType.PARENTOF,
+                [player_info_icon, player_info]
+            );
+    
+            this.createRelationship(
+                players_info_div,
+                RelationType.PARENTOF,
+                [player_info_internal_div]
+            )
+        };
+
+        this.createRelationship(
+            players_details_main_div,
+            RelationType.PARENTOF,
+            [players_details_main_div_img, players_info_div]
+        );
+
+        this.createRelationship(
+            parent,
+            RelationType.PARENTOF,
+            [players_details_main_div, players_details_main_text]
+        );
+    }
+
+    createAboutContent() {
+
+    }
+
     createFooter(parent) {
         const footer = this.createElement('footer');
-
         this.createRelationship(parent, RelationType.PARENTOF, [footer]);
+    }
+
+    animate() {
+        const elements = {
+            logoElement: $.querySelector('.main__nav__logo'),
+            mainPageText: $.querySelector('.main__page__text'),
+            mainPageForm: $.querySelector('.main__page__form'),
+            navItems: $.querySelector('.main__nav__items'),
+            worksSection: $.querySelector('.works__section'),
+            worksContent: $.querySelector('.works__content__div'),
+            worksContentTrophies: $.querySelectorAll('.ion-trophy'),
+            worldCompsSection: $.querySelector('.world__comps__section'),
+            playersDetailsSection: $.querySelector('.players__details__section'),
+            playerImage: $.querySelector('.player__details__img')
+        }
+
+        elements.logoElement.classList.add('animated', 'fadeIn');
+        elements.mainPageText.classList.add('animated', 'fadeInUp');
+        elements.mainPageForm.classList.add('animated', 'fadeIn');
+        elements.navItems.classList.add('animated', 'fadeIn');
+
+        new Waypoint({
+            element: elements.worksSection,
+            handler: (direction) => {
+                elements.worksContent.classList.add('animated', 'bounceIn');
+            },
+            offset: '45%'
+        });
+
+        elements.worksContentTrophies.forEach(trophy => {
+            new Waypoint({
+                element: elements.worldCompsSection,
+                handler: (direction) => {
+                    trophy.classList.add('animated', 'bounceIn');
+                },
+                offset: '45%'
+            });
+        });
+
+        new Waypoint({
+            element: elements.playersDetailsSection,
+            handler: (direction) => {
+                elements.playerImage.classList.add('animated', 'fadeInDown');
+            },
+            offset: '70%'
+        });
+
     }
 }
 

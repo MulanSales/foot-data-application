@@ -36,6 +36,7 @@ window.addEventListener('load', () => {
 
     const mainPage = new MainPage(elements);
     state.loadedComponents[MainPage.name] = mainPage;
+
 });
 
 /*****
