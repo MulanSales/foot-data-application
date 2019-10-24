@@ -268,8 +268,13 @@ header {
     align-items: center;
 }
 
+.players__details__main {
+    display: flex;
+    align-items: center;
+}
+
 .players__details__main__div {
-    margin-top: 20px;
+    margin-top: 0.75rem;
     display: flex;
     align-content: center;
     align-items: center;
@@ -277,9 +282,10 @@ header {
 }
 
 .players__details__main__div img{
-    width: 28%;
-    height: 70%;
-    border-radius: 60%;
+    flex: 0.5;
+    width: auto;
+    height: 250px;
+    border-radius: 30%;
     padding: 10px;
 }
 
@@ -307,4 +313,23 @@ header {
 
 .player__info__internal p {
     font-weight: 400;
+}
+
+/** Carousel Elements **/
+.players__details__main__div__carousel_el {
+    display: flex;
+    align-items: center;
+}
+
+.carousel__arrow {
+    font-size: 350%;
+    color: rgb(168, 168, 168);
+    padding: 10px;
+    margin-bottom: 60%;
+}
+
+.carousel__arrow:hover {
+    color: #e71515a8;
+    padding: 10px;
+    cursor: pointer;
 }

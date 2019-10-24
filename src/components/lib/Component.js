@@ -1,4 +1,4 @@
-import {RelationType} from './RelationType';
+import { PARENTOF, SIBLINGOF, CHILDOF } from './RelationType';
 
 const $ = document;
 
@@ -68,11 +68,21 @@ export const Component = class {
     createRelationship(element, relation, relatedElements) {
 
         try {
-            if (relation === RelationType.PARENTOF) {
+            if (relation === PARENTOF) {
                 relatedElements.forEach(relElement => {
                     element.insertAdjacentElement('beforeend', relElement);
                 });
-            };
+            }
+            else if (relation === SIBLINGOF) {
+                relatedElements.forEach(relElement => {
+                    element.parentNode.appendChild(relElement);
+                });
+            }
+            else if (relation === CHILDOF) {
+                relatedElements.forEach(relElement => {
+                    relElement.insertAdjacentElement('afterbegin', element);
+                });
+            }
         } catch (err) {
             console.log(err);
         }

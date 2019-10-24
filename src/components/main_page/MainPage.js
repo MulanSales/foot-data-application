@@ -1,5 +1,6 @@
 import { Component } from '../lib/Component';
-import { RelationType } from '../lib/RelationType';
+import { PARENTOF, SIBLINGOF, CHILDOF } from '../lib/RelationType';
+import Info from '../../models/Info';
 
 import baseCss from './css/styles.css';
 import queriesCss from './css/queries.css';
@@ -13,8 +14,8 @@ import '../../vendors/js/noframework.waypoints';
 
 const $ = document;
 
-export const MainPage = class extends Component {
 
+export const MainPage = class extends Component {
     /**
      * MainPage constructor
      * @param {Elements} elements 
@@ -22,17 +23,26 @@ export const MainPage = class extends Component {
     constructor(elements) {
         super(elements, [baseCss, queriesCss]);
 
-        this.init();
-
-        const body = this.elements.body;
-        this.createHeader(body);
-        this.createSection(body, 'How it Works', 'works__section', this.createWorksContent);
-        this.createSection(body, 'World Competitions', 'world__comps__section', this.createWorldCompetitionsContent);
-        this.createSection(body, 'Player Details', 'players__details__section', this.createPlayerDetailsContent);
-        this.createSection(body, 'About', 'about__section', (param) => {return;});
-        this.createFooter(body);
-
-        this.animate();
+        try {
+            const info = new Info();
+            info.fetchResources()
+                .then((result) => {
+                    this.info = result;
+                    this.init();
+    
+                    const body = this.elements.body;
+                    this.createHeader(body);
+                    this.createSection(body, 'How it Works', 'works__section', this.createWorksContent);
+                    this.createSection(body, 'World Competitions', 'world__comps__section', this.createWorldCompetitionsContent);
+                    this.createSection(body, 'Player Details', 'players__details__section', this.createPlayerDetailsContent);
+                    this.createSection(body, 'About', 'about__section', (param) => {return;});
+                    this.createFooter(body);
+            
+                    this.animate();
+                });
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     /**
@@ -80,7 +90,7 @@ export const MainPage = class extends Component {
 
         const main_page_div_h1 = $.createElement('h1');
         main_page_div_h1.setAttribute('class', 'main__page__text');
-        main_page_div_h1.innerHTML = `Track the world's most popular football competitions, matches, teams and players.`;
+        main_page_div_h1.innerHTML = this.info.description;
 
         const main_page_div_form = $.createElement('form');
         main_page_div_form.setAttribute('class', 'main__page__form');
@@ -143,7 +153,7 @@ export const MainPage = class extends Component {
 
         this.createRelationship(
             div_section_title, 
-            RelationType.PARENTOF, [
+            PARENTOF, [
                 div_section_title_i,
                 div_section_title_h2
             ]
@@ -151,13 +161,13 @@ export const MainPage = class extends Component {
 
         this.createRelationship(
             section, 
-            RelationType.PARENTOF, 
+            PARENTOF, 
             [div_section_title]
         );
 
         this.createRelationship(
             parent,
-            RelationType.PARENTOF,
+            PARENTOF,
             [section]
         );
 
@@ -195,26 +205,26 @@ export const MainPage = class extends Component {
 
             this.createRelationship(
                 works_content_div,
-                RelationType.PARENTOF,
+                PARENTOF,
                 [works_content_div_i, works_content_div_p]
             );
 
             this.createRelationship(
                 div_works_content_div,
-                RelationType.PARENTOF,
+                PARENTOF,
                 [works_content_div]
             );
         }
 
         this.createRelationship(
             div_works_content,
-            RelationType.PARENTOF,
+            PARENTOF,
             [div_works_content_div, div_works_content_img]
         );
 
         this.createRelationship(
             parent,
-            RelationType.PARENTOF,
+            PARENTOF,
             [div_works_content]
         );
     }
@@ -243,13 +253,13 @@ export const MainPage = class extends Component {
 
         this.createRelationship(
             worlds_comps_content_text,
-            RelationType.PARENTOF,
+            PARENTOF,
             [worlds_comps_content_text_p]
         );
 
         this.createRelationship(
             worlds_comps_content,
-            RelationType.PARENTOF,
+            PARENTOF,
             [worlds_comps_content_img]
         );
 
@@ -263,93 +273,129 @@ export const MainPage = class extends Component {
 
             this.createRelationship(
                 worlds_comps_content,
-                RelationType.PARENTOF,
+                PARENTOF,
                 [worlds_comps_content_i]
             );
         };
 
         this.createRelationship(
             world_comps_main_div,
-            RelationType.PARENTOF,
+            PARENTOF,
             [worlds_comps_content, worlds_comps_content_text]
         );
 
         this.createRelationship(
             parent,
-            RelationType.PARENTOF,
+            PARENTOF,
             [world_comps_main_div]
         );
     }
 
     createPlayerDetailsContent(parent) {
 
-        const players_details_main_div = this.createElement('div', {
-            class: 'players__details__main__div'
-        });
+        const players = this.info.players;
 
-        const players_details_main_div_img = this.createElement('img', {
-            class: 'player__details__img',
-            src: `${cr7Image}`,
-            alt: 'Cristiano Ronaldo Image'
-        });
+        const players_details_main = this.createElement('div', {
+            class: 'players__details__main'
+        })
+
+        for (const [index, playerInfo] of players.entries()) {
+
+            const players_details_main_div = this.createElement('div', {
+                class: `players__details__main__div player__details--${index}`,
+                style: `${index !== 0 ? 'display: none' : 'display: flex'}`
+            });
+    
+            const players_details_carousel_div = this.createElement('div', {
+                class: `players__details__main__div__carousel_el player__details--${index}l`
+            });
+    
+            const players_details_main_div_img = this.createElement('img', {
+                class: `player__details__img player__details--${index}`,
+                src: `${cr7Image}`,
+                alt: 'Cristiano Ronaldo Image'
+            });
+
+            const players_info_div = this.createElement('div', {
+                class: `players__info__div player__details--${index}`
+            });
+
+            for (let [key, value] of Object.entries(playerInfo)){
+
+                if (!value || key === 'id') {
+                    continue;
+                }
+    
+                key = key.toString();
+                key = key.charAt(0).toUpperCase().concat(key.slice(1, key.length));
+    
+                const player_info = this.createElement('p', {
+                    class: `player__info__${key}`,
+                    innerHTML: `<strong>${key}</strong>: ${value}`
+                });
+    
+                const player_info_icon = this.createElement('i', {
+                    class: 'ion-android-radio-button-on'
+                });
+    
+                const player_info_internal_div = this.createElement('div', {
+                    class: 'player__info__internal'
+                });
+                this.createRelationship(
+                    player_info_internal_div,
+                    PARENTOF,
+                    [player_info_icon]
+                );
+    
+                this.createRelationship(
+                    player_info_icon,
+                    SIBLINGOF,
+                    [player_info]
+                );
+    
+                this.createRelationship(
+                    players_info_div,
+                    PARENTOF,
+                    [player_info_internal_div]
+                );
+            };
+
+            this.createRelationship(
+                players_details_main_div,
+                PARENTOF,
+                [players_details_carousel_div, players_info_div]
+            );
+    
+            this.createRelationship(
+                players_details_carousel_div,
+                PARENTOF,
+                [players_details_main_div_img]
+            );
+
+            this.createRelationship(
+                players_details_main,
+                PARENTOF,
+                [players_details_main_div]
+            );
+
+            this.createRelationship(
+                parent,
+                PARENTOF,
+                [players_details_main]
+            );
+
+            this.createPlayersCarousel(players_details_main_div, index, players.length);
+        };
 
         const players_details_main_text = this.createElement('p', {
             class: 'players__details__main__text',
             innerHTML: 'Get full information about your favorite player status on the major leagues'
         });
 
-        const players_info_div = this.createElement('div', {
-            class: 'players__info__div'
-        });
-
-        const playerInfo = {
-            player: {
-                Name: "Cristiano Ronaldo",
-                DateOfBirth: "1985-02-05",
-                CountryOfBirth: "Portugal",
-                Position: "Attacker",
-                ShirtNumber: 7,
-                LastUpdated: "2019-09-12T02:54:53Z"
-            }
-        }
-
-        for (let [key, value] of Object.entries(playerInfo.player)){
-            const player_info = this.createElement('p', {
-                class: `player__info__${key.toString()}`,
-                innerHTML: `<strong>${key.toString()}</strong>: ${value}`
-            });
-
-            const player_info_icon = this.createElement('i', {
-                class: 'ion-android-radio-button-on'
-            });
-
-            const player_info_internal_div = this.createElement('div', {
-                class: 'player__info__internal'
-            });
-
-            this.createRelationship(
-                player_info_internal_div,
-                RelationType.PARENTOF,
-                [player_info_icon, player_info]
-            );
-    
-            this.createRelationship(
-                players_info_div,
-                RelationType.PARENTOF,
-                [player_info_internal_div]
-            )
-        };
-
-        this.createRelationship(
-            players_details_main_div,
-            RelationType.PARENTOF,
-            [players_details_main_div_img, players_info_div]
-        );
-
         this.createRelationship(
             parent,
-            RelationType.PARENTOF,
-            [players_details_main_div, players_details_main_text]
+            PARENTOF,
+            [players_details_main_text]
         );
     }
 
@@ -359,7 +405,68 @@ export const MainPage = class extends Component {
 
     createFooter(parent) {
         const footer = this.createElement('footer');
-        this.createRelationship(parent, RelationType.PARENTOF, [footer]);
+        this.createRelationship(parent, PARENTOF, [footer]);
+    }
+
+    createPlayersCarousel(element, index, length) {
+
+        if (index === 0) {
+            const arrowLeft = this.createElement('i', {
+                class: `ion-chevron-left carousel__arrow`,
+                style: 'visibility: hidden'
+            });
+    
+            this.createRelationship(arrowLeft, CHILDOF, [element.parentNode]);
+        }
+        else if (index === (length - 1)) {
+            const arrowRight = this.createElement('i', {
+                class: `ion-chevron-right carousel__arrow`
+            });          
+    
+            this.createRelationship(element.parentNode,PARENTOF, [arrowRight]);
+
+            const arrowElements = Array.from($.querySelectorAll('.carousel__arrow'));
+
+            for (const [index, arrowEl] of arrowElements.entries()) {
+                arrowEl.addEventListener('click', e => {
+                    const players_details_divs = Array.from($.querySelectorAll('.players__details__main__div'));
+
+                    for (const [index, pdd] of players_details_divs.entries()) {
+                        if (pdd.style.display === 'flex') {
+                            let playerIndex = parseInt(pdd.classList[1].split('--')[1]);
+
+                            if (arrowEl.classList[0] === 'ion-chevron-right' 
+                                && playerIndex < players_details_divs.length) {
+                                playerIndex += 1;                            
+                                players_details_divs[playerIndex-1].style.display = 'none';      
+                                players_details_divs[playerIndex].style.display = 'flex';   
+
+                                arrowElements[0].style.visibility = 'visible';
+
+                                if (playerIndex === players_details_divs.length - 1) {
+                                    arrowElements[1].style.visibility = 'hidden';
+                                }
+                            } else if (playerIndex > 0) {
+                                playerIndex -= 1;
+                                players_details_divs[playerIndex+1].style.display = 'none';      
+                                players_details_divs[playerIndex].style.display = 'flex';
+
+                                arrowElements[1].style.visibility = 'visible';
+
+                                if (playerIndex === 0) {
+                                    arrowElements[0].style.visibility = 'hidden';
+                                }
+                            }
+                            break;
+                        }
+                    };
+                });   
+            };
+        }
+    }
+
+    createCarouselEvents() {
+        
     }
 
     animate() {
@@ -402,7 +509,7 @@ export const MainPage = class extends Component {
         new Waypoint({
             element: elements.playersDetailsSection,
             handler: (direction) => {
-                elements.playerImage.classList.add('animated', 'fadeInDown');
+                elements.playerImage.classList.add('animated', 'fadeInDown', 'delay-1s');
             },
             offset: '70%'
         });

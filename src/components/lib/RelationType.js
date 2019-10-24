@@ -1,7 +1,7 @@
 
-export const RelationType = {
-    PARENTOF: 'parentOf',
-    CHILDOF: 'childOf',
-    SIBLINGOF: 'siblingOf'
-};
+const PARENTOF = 'parentOf';
+const CHILDOF = 'childOf';
+const SIBLINGOF = 'siblingOf';
+
+export {PARENTOF, CHILDOF, SIBLINGOF};
 
