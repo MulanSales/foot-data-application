@@ -70,7 +70,7 @@ header {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex: 1;
+    flex: 0.75;
 }
 
 .main__page__text {
@@ -82,12 +82,12 @@ header {
 
 .main__page__form {
     display: flex;
-    justify-content: center;
-    margin-bottom: 150px;
+    align-content: center;
+    width: 45%;
 }
 
 .main__page__form input {
-    width: 400px;
+    width: 100%;
     border-radius: 10px;
     padding: 0 10px;
     font-family: inherit;
@@ -284,7 +284,7 @@ header {
 .players__details__main__div img{
     flex: 0.5;
     width: auto;
-    height: 250px;
+    height: 220px;
     border-radius: 30%;
     padding: 10px;
 }
@@ -330,6 +330,5 @@ header {
 
 .carousel__arrow:hover {
     color: #e71515a8;
-    padding: 10px;
     cursor: pointer;
 }

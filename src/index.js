@@ -2,6 +2,9 @@ import { MainPage } from './components/main_page/MainPage';
 import baseCss from './resources/css/style.css';
 import ionicCss from './vendors/css/ionicons.css'
 import animateCss from './vendors/css/animate.css';
+import { MobileNav } from './components/mobile_nav/Mobile_Nav';
+
+import Info from './models/Info';
 
 /**** Global state of the app
  * @var {Object} state
@@ -18,7 +21,10 @@ const state = {
  */
 const elements = {
     head: document.querySelector('head'),
-    body: document.querySelector('body')
+    body: document.querySelector('body'),
+    external: {
+
+    }
 }
 
 /****
@@ -34,9 +40,23 @@ window.addEventListener('load', () => {
 
     insertTitle("FootData", elements.head);
 
-    const mainPage = new MainPage(elements);
-    state.loadedComponents[MainPage.name] = mainPage;
-
+    // Loading info object from API
+    new Info().fetchResources()
+        .then((result) => {
+            elements.external.info = result;
+            return;
+        })
+        .then(() => {
+        // Initializing component of main page
+            MainPage(elements);
+        })
+        .then(() => {
+            // Initializing component dependencies of main page
+            MobileNav(elements);
+        })
+        .catch(err => {
+            console.log(err);
+        });
 });
 
 /*****

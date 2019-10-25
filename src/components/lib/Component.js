@@ -8,8 +8,9 @@ export const Component = class {
      * Constructor 
      * @param {Object} elements 
      * @param {Array} path 
+     * @param {Function} initialize
      */
-    constructor(elements, paths) {
+    constructor(elements, paths, initialize) {
         this.elements = elements;
         this.paths = paths;
     }
@@ -30,9 +31,9 @@ export const Component = class {
             
             parent.insertAdjacentElement('beforeend', stylesheetLink);
         })
-        
-        return;
     }
+
+    initialize() {}
 
     /**
      * @param {String} elementName
@@ -86,6 +87,15 @@ export const Component = class {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    /**
+     * @returns {Promise<Component>}
+     */
+    create() {
+        return new Promise((resolve, reject) => {
+            resolve(this.initialize());
+        });
     }
 
     clear() {

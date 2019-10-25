@@ -1,6 +1,5 @@
 import { Component } from '../lib/Component';
 import { PARENTOF, SIBLINGOF, CHILDOF } from '../lib/RelationType';
-import Info from '../../models/Info';
 
 import baseCss from './css/styles.css';
 import queriesCss from './css/queries.css';
@@ -8,40 +7,50 @@ import queriesCss from './css/queries.css';
 import logoImage from '../../resources/img/logo.png';
 import playerImage from '../../resources/img/player.png';
 import worldMapImage from '../../resources/img/world-map.png';
-import cr7Image from './img/cr7.jpg';
+import cr7Image from './img/player2.png';
 
 import '../../vendors/js/noframework.waypoints';
 
+/**
+ * @param {Object} elements 
+ * @returns {Promise<MainPage>}
+ */
+export const MainPage = elements => {
+    const component = new MainPageClass(elements);
+    return component.create();
+};
+
 const $ = document;
 
-
-export const MainPage = class extends Component {
+const MainPageClass = class extends Component {
     /**
      * MainPage constructor
      * @param {Elements} elements 
      */
     constructor(elements) {
-        super(elements, [baseCss, queriesCss]);
+       super(
+            elements,
+            [baseCss, queriesCss]
+        );
+    }
 
+    initialize() {
         try {
-            const info = new Info();
-            info.fetchResources()
-                .then((result) => {
-                    this.info = result;
-                    this.init();
+            this.init();
     
-                    const body = this.elements.body;
-                    this.createHeader(body);
-                    this.createSection(body, 'How it Works', 'works__section', this.createWorksContent);
-                    this.createSection(body, 'World Competitions', 'world__comps__section', this.createWorldCompetitionsContent);
-                    this.createSection(body, 'Player Details', 'players__details__section', this.createPlayerDetailsContent);
-                    this.createSection(body, 'About', 'about__section', (param) => {return;});
-                    this.createFooter(body);
+            const body = this.elements.body;
+            this.createHeader(body);
+            this.createSection(body, 'How it Works', 'works__section', this.createWorksContent);
+            this.createSection(body, 'World Competitions', 'world__comps__section', this.createWorldCompetitionsContent);
+            this.createSection(body, 'Player Details', 'players__details__section', this.createPlayerDetailsContent);
+            this.createSection(body, 'About', 'about__section', (param) => {return;});
+            this.createFooter(body);
             
-                    this.animate();
-                });
+            this.animate();
+            return this;
         } catch (err) {
             console.log(err);
+            return err;
         }
     }
 
@@ -90,7 +99,7 @@ export const MainPage = class extends Component {
 
         const main_page_div_h1 = $.createElement('h1');
         main_page_div_h1.setAttribute('class', 'main__page__text');
-        main_page_div_h1.innerHTML = this.info.description;
+        main_page_div_h1.innerHTML = this.elements.external.info.description;
 
         const main_page_div_form = $.createElement('form');
         main_page_div_form.setAttribute('class', 'main__page__form');
@@ -293,7 +302,7 @@ export const MainPage = class extends Component {
 
     createPlayerDetailsContent(parent) {
 
-        const players = this.info.players;
+        const players = this.elements.external.info.players;
 
         const players_details_main = this.createElement('div', {
             class: 'players__details__main'
@@ -316,8 +325,8 @@ export const MainPage = class extends Component {
                 alt: 'Cristiano Ronaldo Image'
             });
 
-            const players_info_div = this.createElement('div', {
-                class: `players__info__div player__details--${index}`
+            const players__div = this.createElement('div', {
+                class: `players____div player__details--${index}`
             });
 
             for (let [key, value] of Object.entries(playerInfo)){
@@ -329,41 +338,41 @@ export const MainPage = class extends Component {
                 key = key.toString();
                 key = key.charAt(0).toUpperCase().concat(key.slice(1, key.length));
     
-                const player_info = this.createElement('p', {
-                    class: `player__info__${key}`,
+                const player_ = this.createElement('p', {
+                    class: `player____${key}`,
                     innerHTML: `<strong>${key}</strong>: ${value}`
                 });
     
-                const player_info_icon = this.createElement('i', {
+                const player__icon = this.createElement('i', {
                     class: 'ion-android-radio-button-on'
                 });
     
-                const player_info_internal_div = this.createElement('div', {
-                    class: 'player__info__internal'
+                const player__internal_div = this.createElement('div', {
+                    class: 'player____internal'
                 });
                 this.createRelationship(
-                    player_info_internal_div,
+                    player__internal_div,
                     PARENTOF,
-                    [player_info_icon]
+                    [player__icon]
                 );
     
                 this.createRelationship(
-                    player_info_icon,
+                    player__icon,
                     SIBLINGOF,
-                    [player_info]
+                    [player_]
                 );
     
                 this.createRelationship(
-                    players_info_div,
+                    players__div,
                     PARENTOF,
-                    [player_info_internal_div]
+                    [player__internal_div]
                 );
             };
 
             this.createRelationship(
                 players_details_main_div,
                 PARENTOF,
-                [players_details_carousel_div, players_info_div]
+                [players_details_carousel_div, players__div]
             );
     
             this.createRelationship(
@@ -389,7 +398,7 @@ export const MainPage = class extends Component {
 
         const players_details_main_text = this.createElement('p', {
             class: 'players__details__main__text',
-            innerHTML: 'Get full information about your favorite player status on the major leagues'
+            innerHTML: 'Get full rmation about your favorite player status on the major leagues'
         });
 
         this.createRelationship(
@@ -454,7 +463,7 @@ export const MainPage = class extends Component {
                                 arrowElements[1].style.visibility = 'visible';
 
                                 if (playerIndex === 0) {
-                                    arrowElements[0].style.visibility = 'hidden';
+                                    arrowElements[0].style.visibility = 'visible';
                                 }
                             }
                             break;
