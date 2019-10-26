@@ -7,7 +7,7 @@ import queriesCss from './css/queries.css';
 import logoImage from '../../resources/img/logo.png';
 import playerImage from '../../resources/img/player.png';
 import worldMapImage from '../../resources/img/world-map.png';
-import cr7Image from './img/player2.png';
+import cr7Image from './img/player3.jpg';
 
 import '../../vendors/js/noframework.waypoints';
 
@@ -39,11 +39,12 @@ const MainPageClass = class extends Component {
             this.init();
     
             const body = this.elements.body;
+            const sectionsTitles = this.elements.external.info.sections.slice(1, 5);
             this.createHeader(body);
-            this.createSection(body, 'How it Works', 'works__section', this.createWorksContent);
-            this.createSection(body, 'World Competitions', 'world__comps__section', this.createWorldCompetitionsContent);
-            this.createSection(body, 'Player Details', 'players__details__section', this.createPlayerDetailsContent);
-            this.createSection(body, 'About', 'about__section', (param) => {return;});
+            this.createSection(body, sectionsTitles[0], 'works__section', this.createWorksContent);
+            this.createSection(body, sectionsTitles[1], 'world__comps__section', this.createWorldCompetitionsContent);
+            this.createSection(body, sectionsTitles[2], 'players__details__section', this.createPlayerDetailsContent);
+            this.createSection(body, sectionsTitles[3], 'about__section', (param) => {return;});
             this.createFooter(body);
             
             this.animate();
@@ -78,9 +79,11 @@ const MainPageClass = class extends Component {
         // Nav bar items
         const nav_items = $.createElement('ul');
         nav_items.setAttribute('class', 'main__nav__items');
-        const items = ['Home', 'How It Works', 'World Competitions', 'About'];
 
-        items.forEach(item => {
+        const nav_items_names = this.elements.external.info.sections;
+        nav_items_names[3] = nav_items_names[4];
+
+        nav_items_names.slice(0, 4).forEach(item => {
             const li_element = $.createElement('li');
             const li_element_a = $.createElement('a');
 
@@ -198,6 +201,8 @@ const MainPageClass = class extends Component {
             alt: 'Football Player Art'
         });
 
+        const works_content_texts = this.elements.external.info.functionalities;
+
         const works_contents_divs = ['ion-ios-personadd', 'ion-android-walk', 'ion-android-calendar'];
         for (let i = 0; i < works_contents_divs.length; i++) {
             const works_content_div = this.createElement('div', {
@@ -209,7 +214,7 @@ const MainPageClass = class extends Component {
             });
 
             const works_content_div_p = this.createElement('p', {
-                innerHTML: 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.'
+                innerHTML: works_content_texts[i] 
             })
 
             this.createRelationship(
@@ -257,7 +262,7 @@ const MainPageClass = class extends Component {
         });
 
         const worlds_comps_content_text_p = this.createElement('p', {
-            innerHTML: 'Explore all the areas, competitions and players around the globe!'
+            innerHTML: this.elements.external.info.about[0]
         });
 
         this.createRelationship(
@@ -273,7 +278,7 @@ const MainPageClass = class extends Component {
         );
 
         const trophiesCount = 6;
-        const competitions = [ "UEFA Champions League", "Canadian Championship", "J.League Cup", "Copa do Brasil", "WC Qualification", "A League"]
+        const competitions = this.elements.external.info.comps; 
         for (let i = 0; i < trophiesCount; i++) {
             const worlds_comps_content_i = this.createElement('i', {
                 class: `ion-trophy trophy--${i} tooltip`,
@@ -326,7 +331,7 @@ const MainPageClass = class extends Component {
             });
 
             const players__div = this.createElement('div', {
-                class: `players____div player__details--${index}`
+                class: `players__div player__details--${index}`
             });
 
             for (let [key, value] of Object.entries(playerInfo)){
@@ -339,7 +344,7 @@ const MainPageClass = class extends Component {
                 key = key.charAt(0).toUpperCase().concat(key.slice(1, key.length));
     
                 const player_ = this.createElement('p', {
-                    class: `player____${key}`,
+                    class: `player__info__${key}`,
                     innerHTML: `<strong>${key}</strong>: ${value}`
                 });
     
@@ -348,7 +353,7 @@ const MainPageClass = class extends Component {
                 });
     
                 const player__internal_div = this.createElement('div', {
-                    class: 'player____internal'
+                    class: 'player__info__internal'
                 });
                 this.createRelationship(
                     player__internal_div,
@@ -398,7 +403,7 @@ const MainPageClass = class extends Component {
 
         const players_details_main_text = this.createElement('p', {
             class: 'players__details__main__text',
-            innerHTML: 'Get full rmation about your favorite player status on the major leagues'
+            innerHTML: this.elements.external.info.about[1]
         });
 
         this.createRelationship(
@@ -463,7 +468,7 @@ const MainPageClass = class extends Component {
                                 arrowElements[1].style.visibility = 'visible';
 
                                 if (playerIndex === 0) {
-                                    arrowElements[0].style.visibility = 'visible';
+                                    arrowElements[0].style.visibility = 'hidden';
                                 }
                             }
                             break;
@@ -518,7 +523,7 @@ const MainPageClass = class extends Component {
         new Waypoint({
             element: elements.playersDetailsSection,
             handler: (direction) => {
-                elements.playerImage.classList.add('animated', 'fadeInDown', 'delay-1s');
+                elements.playerImage.classList.add('animated', 'fadeIn', 'delay-1s');
             },
             offset: '70%'
         });

@@ -3,7 +3,8 @@ export default class Info {
     constructor() {}
 
     fetchResources() {
-        return fetch('https://foot-data-api.herokuapp.com/v1/info', {
+        const url = 'https://foot-data-api.herokuapp.com/';
+        return fetch(`${url}v1/info`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
         })
@@ -11,9 +12,20 @@ export default class Info {
             return res.json();
         })
         .then(obj => {
-            this.players = obj.players;
             this.appName = obj.applicationName;
             this.description = obj.description;
+            this.sections = obj.sections;
+            this.cusRev = obj.customerReviews;
+
+            this.cusRev.forEach(cr => {
+                cr.imageUrl = url.concat(cr.imageUrl);
+            });
+
+            this.functionalities = obj.functionalities;
+            this.comps = obj.competitions;
+            this.about = obj.about;
+            this.players = obj.players;
+
             return this;
         })
         .catch(err => {

@@ -1,15 +1,44 @@
-/* Big tablets to 1200px: widths smaller than the 1140px row*/
+//* PC monitors*/
+@media only screen and (max-width: 2880px) {
+
+    .main__page__form { width: 50%; }
+}
+
+//* Big tablets to 1200px: widths smaller than the 1140px row*/
 @media only screen and (max-width: 1200px) {
 
+    .main__page__form { width: 55%; }
 }
 
 /* Small tablets to big tablets: from 768px to 1023px */
 @media only screen and (max-width: 1023px) {
+    .main__nav__items {
+        visibility: visible;
+    }
 
+    .main__page__form { width: 60%; }
+
+    .main__page__text {
+        font-size: 180%;
+    } 
+
+    .world__comps__content__text p {
+        font-size: 87%;
+    }
 }
 
 /* Small phones to small tablets: from 481px to 767px */
 @media only screen and (max-width: 767px) {
+
+    .main__page__form { width: 70%; }
+
+    .main__page__text {
+        font-size: 140%;
+    }
+
+    .main__page__form input {
+        width: 100%;
+    }
 
     .works__content {
         margin-top: 2.0rem;
@@ -24,16 +53,41 @@
 
     .works__content__img {
         height: 15rem;
-        margin-top: 1rem;
+        margin-top: 3rem;
     }
 
-    .works__content__div div p {
+    .world__comps__content__text p {
+        font-size: 80%;
         text-align: center;
+    }
+
+    .world__comps__content i {
+        font-size: 130%;
+    }
+
+    .tooltip .tooltiptext {
+        width: 3rem;
     }
 
 }
 
 /* Small phones: from 0 to 480px */
 @media only screen and (max-width: 480px) {
+    .main__page__form { width: 90%; }
 
+    .tooltip .tooltiptext {
+        width: 2.5rem;
+    }
+    
+    .world__comps__content i {
+        font-size: 100%;
+    }
+
+    .carousel__arrow {
+        display: none;
+    }
+
+    .players__details__main__text {
+        font-size: 120%;
+    }
 }

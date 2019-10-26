@@ -41,7 +41,6 @@ header {
 }
 
 .main__nav__items li {
-    margin-left: 20px;
     font-size: 105%;
     text-transform: uppercase;
 }
@@ -132,7 +131,7 @@ header {
 .works__content__div {
     display: flex;
     flex-direction: row;
-    margin-right: 100px;
+    margin-right: 2rem;
     opacity: 0;
 }
 
@@ -143,7 +142,6 @@ header {
 .works__content__div div {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: column;
     margin-bottom: 10px;
 }
@@ -157,6 +155,7 @@ header {
 .works__content__div div p {
     width: 100%;
     color: #180404;
+    text-align: center;
 }
 
 .works__content img {
@@ -241,7 +240,7 @@ header {
 /* Tooltip text */
 .tooltip .tooltiptext {
     visibility: hidden;
-    width: 100px;
+    width: 5rem;
     font-size: 40%;
     background-color: black;
     color: #fff;
@@ -271,6 +270,7 @@ header {
 .players__details__main {
     display: flex;
     align-items: center;
+    width: 400px;
 }
 
 .players__details__main__div {
@@ -293,6 +293,7 @@ header {
     padding-top: 30px;
     font-size: 140%;
     font-weight: 200;
+    text-align: center;
 }
 
 .players__info__div {
@@ -324,7 +325,6 @@ header {
 .carousel__arrow {
     font-size: 350%;
     color: rgb(168, 168, 168);
-    padding: 10px;
     margin-bottom: 60%;
 }
 
