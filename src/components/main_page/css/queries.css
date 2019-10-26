@@ -69,6 +69,12 @@
         width: 3rem;
     }
 
+    .customers__main__div {
+        flex-direction: column;
+        height: auto;
+        background-size: auto;
+    }
+
 }
 
 /* Small phones: from 0 to 480px */

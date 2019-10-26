@@ -15,9 +15,9 @@ export default class Info {
             this.appName = obj.applicationName;
             this.description = obj.description;
             this.sections = obj.sections;
-            this.cusRev = obj.customerReviews;
+            this.customerReviews = obj.customerReviews;
 
-            this.cusRev.forEach(cr => {
+            this.customerReviews.forEach(cr => {
                 cr.imageUrl = url.concat(cr.imageUrl);
             });
 

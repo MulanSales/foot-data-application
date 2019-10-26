@@ -332,3 +332,53 @@ header {
     color: #e71515a8;
     cursor: pointer;
 }
+
+/*-----------------------------------------------/
+/ CUSTOMER REVIEWS 
+/----------------------------------------------*/
+
+.customers__main__div {
+    background-image:  linear-gradient(rgba(0, 0, 0, 0.801), rgba(0, 0, 0, 0.767)), url('../img//back-3.jpg');
+    background-size: cover;
+    height: 45vh;
+    display: flex;
+    flex-direction: row;
+    background-attachment: fixed;
+    margin-top: 2rem;
+}
+
+.customer__review__container  {
+    margin: 2rem 1rem;
+}
+
+.customer__review__container blockquote {
+    color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+    text-align: left;
+}
+
+.customer__review__container blockquote::before {
+    content: "\201C";
+    font-size: 400%;
+    display: flex;
+    margin-bottom: -3rem;
+}
+
+.customer__review__ref {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.customer__review__ref img {
+    border-radius: 50%;
+    width: 60px
+}
+
+.customer__review__ref cite {
+	color: #fff;
+    font-size: 90%;
+    padding: 0 1rem;
+}

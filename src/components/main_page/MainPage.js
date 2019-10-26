@@ -39,11 +39,12 @@ const MainPageClass = class extends Component {
             this.init();
     
             const body = this.elements.body;
-            const sectionsTitles = this.elements.external.info.sections.slice(1, 5);
+            const sectionsTitles = this.elements.external.info.sections.slice(1, 6);
             this.createHeader(body);
             this.createSection(body, sectionsTitles[0], 'works__section', this.createWorksContent);
             this.createSection(body, sectionsTitles[1], 'world__comps__section', this.createWorldCompetitionsContent);
             this.createSection(body, sectionsTitles[2], 'players__details__section', this.createPlayerDetailsContent);
+            this.createSection(body, sectionsTitles[4], 'customers__reviews', this.createCustomerReviewsSection);
             this.createSection(body, sectionsTitles[3], 'about__section', (param) => {return;});
             this.createFooter(body);
             
@@ -413,15 +414,6 @@ const MainPageClass = class extends Component {
         );
     }
 
-    createAboutContent() {
-
-    }
-
-    createFooter(parent) {
-        const footer = this.createElement('footer');
-        this.createRelationship(parent, PARENTOF, [footer]);
-    }
-
     createPlayersCarousel(element, index, length) {
 
         if (index === 0) {
@@ -479,8 +471,62 @@ const MainPageClass = class extends Component {
         }
     }
 
-    createCarouselEvents() {
-        
+    createCustomerReviewsSection(parent) {
+        const customers_main_div = this.createElement('div', {
+            class: 'customers__main__div'
+        });
+
+        const custRevs = this.elements.external.info.customerReviews;
+
+        for (const [index, cust] of custRevs.entries()) {
+            const customer_review_container = this.createElement('div', {
+                class: `customer__review__container customer--${index+1}`
+            });
+
+            const customer_review_text = this.createElement('blockquote', {
+                innerHTML: cust.message
+            });
+
+            const customer_review_ref = this.createElement('div', {
+                class: 'customer__review__ref'
+            });
+
+            const customer_review_image = this.createElement('img', {
+                alt: `Customer ${index} Photo`,
+                src: cust.imageUrl
+            });
+
+            const customer_review_name = this.createElement('cite', {
+                innerHTML: cust.name
+            })
+
+            this.createRelationship(customer_review_ref, 
+                PARENTOF, 
+                [customer_review_image, customer_review_name]
+            );
+
+            this.createRelationship(customer_review_container, 
+                PARENTOF,
+                [customer_review_text, customer_review_ref]
+            );
+
+            this.createRelationship(customers_main_div, PARENTOF, [customer_review_container]);
+        };
+
+        this.createRelationship(
+            parent,
+            PARENTOF,
+            [customers_main_div]
+        );
+    }
+
+    createAboutContent() {
+
+    }
+
+    createFooter(parent) {
+        const footer = this.createElement('footer');
+        this.createRelationship(parent, PARENTOF, [footer]);
     }
 
     animate() {
@@ -492,9 +538,7 @@ const MainPageClass = class extends Component {
             worksSection: $.querySelector('.works__section'),
             worksContent: $.querySelector('.works__content__div'),
             worksContentTrophies: $.querySelectorAll('.ion-trophy'),
-            worldCompsSection: $.querySelector('.world__comps__section'),
-            playersDetailsSection: $.querySelector('.players__details__section'),
-            playerImage: $.querySelector('.player__details__img')
+            worldCompsSection: $.querySelector('.world__comps__section')
         }
 
         elements.logoElement.classList.add('animated', 'fadeIn');
@@ -519,15 +563,6 @@ const MainPageClass = class extends Component {
                 offset: '45%'
             });
         });
-
-        new Waypoint({
-            element: elements.playersDetailsSection,
-            handler: (direction) => {
-                elements.playerImage.classList.add('animated', 'fadeIn', 'delay-1s');
-            },
-            offset: '70%'
-        });
-
     }
 }
 
