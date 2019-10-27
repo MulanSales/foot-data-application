@@ -59,7 +59,7 @@ header {
 }
 
 .main__nav__items li {
-    font-size: 105%;
+    font-size: 95%;
     text-transform: uppercase;
 }
 
@@ -71,7 +71,7 @@ header {
 .main__nav__items li a:visited {
     color: #fff;
     text-decoration: none;
-    margin-left: 25px;
+    margin-left: 15px;
     border-bottom: 2px solid transparent;
     -webkit-transition: border-bottom 0.3s;
     transition: border-bottom 0.3s;
@@ -80,6 +80,33 @@ header {
 .main__nav__items li a:hover,
 .main__nav__items li a:active {
     border-bottom: 2px solid #b60202f3;
+}
+
+.main__nav__items li:nth-child(4) a:link,
+.main__nav__items li:nth-child(4) a:visited {
+    border: 1px solid transparent;
+    padding: 0 0.7rem;
+    border-radius: 10%;
+    background: #e71515a8;
+    transition: color 0.3s;
+}
+
+.main__nav__items li:nth-child(4) a:hover,
+.main__nav__items li:nth-child(4) a:active{
+    color: #ec9090;
+}
+
+.main__nav__items li:nth-child(5) a:link,
+.main__nav__items li:nth-child(5) a:visited {
+    border: 1px solid #e71515a8;
+    padding: 0 0.8rem;
+    border-radius: 10%;
+    transition: background 0.3s;
+}
+
+.main__nav__items li:nth-child(5) a:hover,
+.main__nav__items li:nth-child(5) a:active{
+    background: #e71515ce;
 }
 
 /* Main page components */
@@ -114,28 +141,73 @@ header {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-line-pack: center;
-        align-content: center;
+        align-items: center;
     width: 45%;
+    background: #fff;
 }
 
 .main__page__form input {
     width: 100%;
-    border-radius: 10px;
     padding: 0 10px;
     font-family: inherit;
     font-size: 90%;
     font-weight: 100;
+    border: transparent;
 }
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    height: 2vh;
+    padding: 0 0.5rem;
+}
+
+.dropbtn {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 100%;
+}
+
+.dropbtn i:before {
+    padding: 0.5rem 0.5rem;
+}
+
+.dropbtn i {
+	display: flex;
+	flex-direction: row-reverse;
+	align-items: center;
+	padding: 0 0.2rem;
+    background: rgba(189, 186, 186, 0.884);
+    font-size: 90%;
+}
+
+.dropdown-content {
+    display: none;
+    flex-direction: column;
+    background: #ffF;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    text-decoration: none;
+    text-align: center;
+    padding: 0.5rem;
+    color: #000;
+    font-weight: 400;
+    font-size: 80%;
+}
+
+.dropdown-content a:hover {
+    background: #e71515;
+}
+
+.dropdown:hover .dropdown-content {display: flex;}
 
 .search__btn {
     font-size: 80%;
     font-weight: 300;
-    margin-left: -30px;
-    border-radius: 10px;
     padding: 5px 20px;
-    background: -webkit-gradient(linear, left top, right top, from(#e71515), to(#180404));
-    background: linear-gradient(to right, #e71515, #180404);
-    border: 1px solid #b60202f3;
+    background: #e71515;
     cursor: pointer;
     z-index: 1;
     color: #fff;
@@ -446,7 +518,7 @@ header {
     background-image:  -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.801)), to(rgba(0, 0, 0, 0.767))), url('../img//back-3.jpg');
     background-image:  linear-gradient(rgba(0, 0, 0, 0.801), rgba(0, 0, 0, 0.767)), url('../img//back-3.jpg');
     background-size: cover;
-    height: 45vh;
+    height: 50vh;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;

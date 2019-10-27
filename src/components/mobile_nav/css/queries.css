@@ -14,8 +14,8 @@
     .mobile__nav__icon { display: none;}
 }
 
-/* Small phones to small tablets: from 481px to 767px */
-@media only screen and (max-width: 767px) {
+/* Small phones to small tablets: from 481px to 848px */
+@media only screen and (max-width: 848px) {
 
     .main__nav { -webkit-box-align: unset; -ms-flex-align: unset; align-items: unset;}
 
@@ -34,10 +34,11 @@
         padding-bottom: 0.4rem;
         width: 100%;
         margin-left: 0;
+        margin-bottom: 0.4rem;
     }
 
     .main__nav__logo {
-        -webkit-box-flex: 0.90;
+        -webkit-box-flex: 0.80;
             -ms-flex: 0.90;
                 flex: 0.90;
         display: block;
@@ -67,6 +68,6 @@
 /* Small phones: from 0 to 360px */
 @media only screen and (max-width: 360px) {
     .main__nav__items li {
-        font-size: 75%;
+        font-size: 70%;
     }
 }

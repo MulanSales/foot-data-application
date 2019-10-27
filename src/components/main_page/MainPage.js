@@ -82,9 +82,12 @@ const MainPageClass = class extends Component {
         nav_items.setAttribute('class', 'main__nav__items');
 
         const nav_items_names = this.elements.external.info.sections;
-        nav_items_names[3] = nav_items_names[4];
 
-        nav_items_names.slice(0, 4).forEach(item => {
+        nav_items_names.push('sign up', 'sign in');
+        nav_items_names[3] = nav_items_names[6];
+        nav_items_names[4] = nav_items_names[7];
+
+        nav_items_names.slice(0, 5).forEach(item => {
             const li_element = $.createElement('li');
             const li_element_a = $.createElement('a');
 
@@ -113,7 +116,7 @@ const MainPageClass = class extends Component {
         const main_page_div_form_input = $.createElement('input');
         main_page_div_form_input.setAttribute('type', 'search');
         main_page_div_form_input.setAttribute('name', 'search');
-        main_page_div_form_input.setAttribute('placeholder', 'Insert a competition or match');
+        main_page_div_form_input.setAttribute('placeholder', 'Insert a competition to search');
 
         const main_page_div_form_label = $.createElement('label');
         main_page_div_form_label.setAttribute('for', 'search');
@@ -130,13 +133,56 @@ const MainPageClass = class extends Component {
         main_page_div_form_label.insertAdjacentElement('beforeend', main_page_div_form_label_button);
 
         main_page_div_form.insertAdjacentElement('beforeend', main_page_div_form_input);
-        main_page_div_form.insertAdjacentElement('beforeend', main_page_div_form_label);
 
         main_page_div.insertAdjacentElement('beforeend', main_page_div_h1);
         main_page_div.insertAdjacentElement('beforeend', main_page_div_form);
 
         headerElement.insertAdjacentElement('beforeend', nav);
         headerElement.insertAdjacentElement('beforeend', main_page_div);
+
+
+        // Create dropdown menu for search categories
+        const dropdown_items = ['CMP', 'PLR', 'TM'];
+
+        const main_page_div_form_dropdown = this.createElement('div', {
+            class: 'dropdown'
+        });
+
+        const form_dropdown_btn = this.createElement('button', {
+            class: 'dropbtn'
+        });
+
+        const form_dropdown_i = this.createElement('i', {
+            class: 'ion-android-arrow-dropdown',
+            innerHTML: dropdown_items[0]
+        });
+
+        const form_dropdown_content = this.createElement('div', {
+            class: 'dropdown-content'
+        });
+
+        dropdown_items.forEach(di => {
+            const dropdown_item_a = this.createElement('a', {
+                href: '/',
+                innerHTML: di
+            });
+            
+            this.createRelationship(form_dropdown_content, PARENTOF, [dropdown_item_a]);
+
+        });
+
+        this.createRelationship(form_dropdown_btn, PARENTOF, [form_dropdown_i]);
+
+        this.createRelationship(
+           main_page_div_form_dropdown, 
+           PARENTOF, 
+           [form_dropdown_btn, form_dropdown_content]
+        );
+
+        this.createRelationship(main_page_div_form,
+            PARENTOF, 
+            [main_page_div_form_dropdown, main_page_div_form_label]
+        );
 
         return;
     }
