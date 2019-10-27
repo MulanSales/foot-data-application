@@ -88,6 +88,7 @@ header {
     padding: 0 0.7rem;
     border-radius: 10%;
     background: #e71515a8;
+    -webkit-transition: color 0.3s;
     transition: color 0.3s;
 }
 
@@ -101,6 +102,7 @@ header {
     border: 1px solid #e71515a8;
     padding: 0 0.8rem;
     border-radius: 10%;
+    -webkit-transition: background 0.3s;
     transition: background 0.3s;
 }
 
@@ -141,7 +143,9 @@ header {
     display: -ms-flexbox;
     display: flex;
     -ms-flex-line-pack: center;
-        align-items: center;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
     width: 45%;
     background: #fff;
 }
@@ -156,15 +160,25 @@ header {
 }
 
 .dropdown {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     height: 2vh;
     padding: 0 0.5rem;
 }
 
 .dropbtn {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row-reverse;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
     height: 100%;
 }
 
@@ -173,9 +187,16 @@ header {
 }
 
 .dropbtn i {
+	display: -webkit-box;
+	display: -ms-flexbox;
 	display: flex;
-	flex-direction: row-reverse;
-	align-items: center;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: reverse;
+	    -ms-flex-direction: row-reverse;
+	        flex-direction: row-reverse;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 	padding: 0 0.2rem;
     background: rgba(189, 186, 186, 0.884);
     font-size: 90%;
@@ -183,7 +204,10 @@ header {
 
 .dropdown-content {
     display: none;
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
     background: #ffF;
     z-index: 1;
 }
@@ -201,7 +225,7 @@ header {
     background: #e71515;
 }
 
-.dropdown:hover .dropdown-content {display: flex;}
+.dropdown:hover .dropdown-content {display: -webkit-box;display: -ms-flexbox;display: flex;}
 
 .search__btn {
     font-size: 80%;
