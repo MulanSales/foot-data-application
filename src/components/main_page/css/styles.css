@@ -50,67 +50,6 @@ header {
     height: auto;
 }
 
-.main__nav__items {
-    list-style: none;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    margin-top: 10px;
-}
-
-.main__nav__items li {
-    font-size: 95%;
-    text-transform: uppercase;
-}
-
-.main__nav__items li:last-child {
-    margin-right: 40px;
-}
-
-.main__nav__items li a:link,
-.main__nav__items li a:visited {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 15px;
-    border-bottom: 2px solid transparent;
-    -webkit-transition: border-bottom 0.3s;
-    transition: border-bottom 0.3s;
-}
-
-.main__nav__items li a:hover,
-.main__nav__items li a:active {
-    border-bottom: 2px solid #b60202f3;
-}
-
-.main__nav__items li:nth-child(4) a:link,
-.main__nav__items li:nth-child(4) a:visited {
-    border: 1px solid transparent;
-    padding: 0 0.7rem;
-    border-radius: 10%;
-    background: #e71515a8;
-    -webkit-transition: color 0.3s;
-    transition: color 0.3s;
-}
-
-.main__nav__items li:nth-child(4) a:hover,
-.main__nav__items li:nth-child(4) a:active{
-    color: #ec9090;
-}
-
-.main__nav__items li:nth-child(5) a:link,
-.main__nav__items li:nth-child(5) a:visited {
-    border: 1px solid #e71515a8;
-    padding: 0 0.8rem;
-    border-radius: 10%;
-    -webkit-transition: background 0.3s;
-    transition: background 0.3s;
-}
-
-.main__nav__items li:nth-child(5) a:hover,
-.main__nav__items li:nth-child(5) a:active{
-    background: #e71515ce;
-}
-
 /* Main page components */
 .main__page {
     display: -webkit-box;
@@ -129,6 +68,35 @@ header {
     -webkit-box-flex: 0.75;
         -ms-flex: 0.75;
             flex: 0.75;
+}
+
+.main__nav__items li:nth-child(4) a:link,
+.main__nav__items li:nth-child(4) a:visited  {
+    border: 1px solid transparent;
+    padding: 0 0.7rem;
+    border-radius: 10%;
+    background: #e74c3c;
+    -webkit-transition: color 0.3s;
+    transition: color 0.3s;
+}
+
+.main__nav__items li:nth-child(4) a:hover,
+.main__nav__items li:nth-child(4) a:active{
+    color: #5c2626;
+}
+
+.main__nav__items li:nth-child(5) a:link,
+.main__nav__items li:nth-child(5) a:visited {
+    border: 1px solid #e71515a8;
+    padding: 0 0.8rem;
+    border-radius: 10%;
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+}
+
+.main__nav__items li:nth-child(5) a:hover,
+.main__nav__items li:nth-child(5) a:active{
+    background: #e74c3c;
 }
 
 .main__page__text {
@@ -169,6 +137,7 @@ header {
             flex-direction: column;
     height: 2vh;
     padding: 0 0.5rem;
+    transition: display 0.3s;
 }
 
 .dropbtn {
@@ -211,6 +180,7 @@ header {
             flex-direction: column;
     background: #ffF;
     z-index: 1;
+    transition: display 0.3s;
 }
 
 .dropdown-content a {
@@ -220,10 +190,11 @@ header {
     color: #000;
     font-weight: 400;
     font-size: 80%;
+    transition: background 0.4s;
 }
 
 .dropdown-content a:hover {
-    background: #e71515;
+    background: #e74c3c;
 }
 
 .dropdown:hover .dropdown-content {display: -webkit-box;display: -ms-flexbox;display: flex;}
@@ -232,15 +203,16 @@ header {
     font-size: 80%;
     font-weight: 300;
     padding: 5px 20px;
-    background: #e71515;
+    background: #e74c3c;
     cursor: pointer;
     z-index: 1;
     color: #fff;    
     border: 1px solid #fff;
+    transition: color 0.3s;
 }
 
 .search__btn i:hover {
-    color: rgb(92, 91, 91);
+    color: rgb(59, 58, 58);
 }
 
 /*-----------------------------------------------/
@@ -304,7 +276,7 @@ header {
 .works__content__div div i {
     padding: 5px 10px;
     font-size: 250%;
-    color: #e71515;
+    color: #e74c3c;
 }
 
 .works__content__div div p {
@@ -353,7 +325,7 @@ header {
 .world__comps__content i {
     position: absolute;
     z-index: 1;
-    color: #e71515;
+    color: #e74c3c;
     font-size: 150%;
     opacity: 0;
 }
@@ -505,7 +477,7 @@ header {
 }
 
 .player__info__internal i {
-    color: #e71515;
+    color: #e74c3c;
 }
 
 .player__info__internal p {
@@ -539,12 +511,20 @@ header {
 .customers__reviews {
     padding-left: 0;
     padding-right: 0;
-}
-.customers__main__div {
     background-image:  -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.801)), to(rgba(0, 0, 0, 0.767))), url('../img//back-3.jpg');
     background-image:  linear-gradient(rgba(0, 0, 0, 0.801), rgba(0, 0, 0, 0.767)), url('../img//back-3.jpg');
     background-size: cover;
-    height: 50vh;
+    background-attachment: fixed;
+    padding-bottom: 100px
+}
+
+.customers__reviews h2, 
+.customers__reviews i {
+    color: #fff;
+}
+
+.customers__main__div {
+    height: 40vh;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -554,6 +534,7 @@ header {
             flex-direction: row;
     background-attachment: fixed;
     margin-top: 2rem;
+    padding: 0 150px;
 }
 
 .customer__review__container  {
@@ -602,4 +583,81 @@ header {
 	color: #fff;
     font-size: 90%;
     padding: 0 1rem;
+}
+
+/*----------------------------------------------------- */
+/* FOOTER */
+/*----------------------------------------------------- */
+
+footer {
+    background-color: #fff;
+    padding: 40px;
+    font-size: 75%;
+    background: rgb(26, 25, 25);
+}
+
+.footer__main {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+}
+
+.footer__main__nav {
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 2rem;
+}
+
+.footer__main__nav__items {
+    display: flex;
+    flex: 0.75;
+    padding-left: 13rem;
+}
+
+.footer__main__nav__items p {
+    color: #fff;
+    font-size: 110%;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+.footer__main__nav__items p:hover {
+    color: #e74c3c;
+}
+
+.footer__main__nav__icons {
+    display: flex;
+}
+
+.footer__main__nav__icons i {
+    padding: 0 10px;
+    font-size: 150%;
+    transition: color 0.3s;
+    color: rgb(170, 170, 170);
+}
+
+.footer__main__nav__icons a:hover:nth-child(1) i {
+    color: #e74c3c;
+}
+
+.footer__main__nav__icons a:hover:nth-child(2) i {
+    color: #2980b9;
+}
+
+.footer__main__nav__icons a:hover:nth-child(3) i {
+    color: #3498db;
+}
+
+.footer__main__nav__icons a:hover:nth-child(4) i {
+    color: #9b59b6;
+}
+
+.footer__main__nav__icons a:hover:nth-child(5) i {
+    color: #fff;
+}
+
+.footer__text {
+    text-align: center;
+    color: #ffF;
+    font-size: 110%;
 }

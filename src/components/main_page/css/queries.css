@@ -25,6 +25,10 @@
     .world__comps__content__text p {
         font-size: 87%;
     }
+
+    .customers__main__div {
+        padding: 0 50px;
+    }
 }
 
 /* Small phones to small tablets: from 481px to 848px */

@@ -1,6 +1,13 @@
 import { PARENTOF, SIBLINGOF, CHILDOF } from './RelationType';
+import baseCss from '../../resources/css/style.css';
+import ionicCss from '../../vendors/css/ionicons.css'
+import animateCss from '../../vendors/css/animate.css';
 
 const $ = document;
+
+const DOMElements = {
+
+};
 
 export const Component = class {
 
@@ -10,29 +17,14 @@ export const Component = class {
      * @param {Array} path 
      * @param {Function} initialize
      */
-    constructor(elements, paths, initialize) {
+    constructor(elements, paths) {
         this.elements = elements;
         this.paths = paths;
     }
 
     /**
-     * @param {Element} parent 
-     * @param {String} path
      * @returns
-     */
-    init() {
-        const parent = this.elements.head;
-
-        this.paths.forEach(path => {
-            const stylesheetLink = document.createElement('link'); 
-            stylesheetLink.setAttribute('href', `${path}`);
-            stylesheetLink.setAttribute('rel', 'stylesheet');
-            stylesheetLink.setAttribute('type', 'css');
-            
-            parent.insertAdjacentElement('beforeend', stylesheetLink);
-        })
-    }
-
+    */
     initialize() {}
 
     /**
@@ -88,6 +80,20 @@ export const Component = class {
             console.log(err);
         }
     }
+    /**
+     * @param {string} key 
+     * @param {Element} value 
+    */
+    static addToDOMObject(key, value) {
+        DOMElements[key] = value;
+    };
+
+    /**
+     * @param {string} key 
+    */
+    static getDOMObject(key) {
+        return DOMElements[key];
+    }
 
     /**
      * @returns {Promise<Component>}
@@ -98,7 +104,22 @@ export const Component = class {
         });
     }
 
-    clear() {
-        // TO-DO
+    static clear(elements) {
+        // Clear component-scope stylesheets
+        const head = elements.head;
+        const body = elements.body;
+
+        if (body) {
+            body.innerHTML = '';
+        }
+
+        if (head) {
+            Array.from(head).forEach(hc => {
+                console.log(hc);
+                if (hc.classList.contains('component-score')) {
+                    head.removeChild(hc);
+                }
+            });
+        }
     }
 }

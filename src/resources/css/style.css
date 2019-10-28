@@ -10,6 +10,17 @@
     box-sizing: border-box;
 }
 
+html {
+    overflow-y: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.html::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
 body {
     background-color: #fff;
     color: #555;
@@ -22,8 +33,8 @@ body {
 section {
     padding-top: 25px;
     padding-bottom: 50px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 35px;
+    padding-right: 35px;
 }
 
 .section__title {
@@ -54,7 +65,7 @@ h2 {
 
 h2:after {
     display: block;
-    background-color: #e71515;
+    background-color: #e74c3c;
     height: 2px;
     content: " ";
     width: 150px;
@@ -66,4 +77,47 @@ p {
     font-weight: 300;
     padding: 5px 10px;
     color: #180404;
+}
+
+/*-----------------------------------------------/
+/ HEADER COMPONENTS - MAIN PAGE, SIGNUP PAGE
+/----------------------------------------------*/
+
+.main__nav__items,
+.signup__nav__items {
+    list-style: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    margin-top: 10px;
+}
+
+.main__nav__items li,
+.signup__nav__items li {
+    font-size: 95%;
+    text-transform: uppercase;
+}
+
+.main__nav__items li:last-child,
+.signup__nav__items li:last-child {
+    margin-right: 40px;
+}
+
+.main__nav__items li a:link,
+.main__nav__items li a:visited,
+.signup__nav__items li a:link,
+.signup__nav__items li a:visited {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 15px;
+    border-bottom: 2px solid transparent;
+    -webkit-transition: border-bottom 0.3s;
+    transition: border-bottom 0.3s;
+}
+
+.main__nav__items li a:hover,
+.main__nav__items li a:active,
+.signup__nav__items li a:hover,
+.signup__nav__items li a:active {
+    border-bottom: 2px solid #e74c3c;
 }

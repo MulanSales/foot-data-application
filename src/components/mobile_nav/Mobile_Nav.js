@@ -8,7 +8,7 @@ import { PARENTOF } from '../lib/RelationType';
  * @param {Object} elements 
  * @returns {Promise<MobileNav>}
  */
-export const MobileNav = elements => {
+export const startComponent = elements => {
     const component = new MobileNavClass(elements);
     return component.create();
 };
@@ -21,7 +21,7 @@ const MobileNavClass = class extends Component {
      * @param {Elements} elements 
      */
     constructor(elements) {
-        super(elements, [baseCss, queriesCss]);
+        super(elements);
     }
 
     initialize() {

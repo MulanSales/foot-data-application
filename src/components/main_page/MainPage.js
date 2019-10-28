@@ -15,10 +15,30 @@ import '../../vendors/js/noframework.waypoints';
  * @param {Object} elements 
  * @returns {Promise<MainPage>}
  */
-export const MainPage = elements => {
+export const startComponent = elements => {
     const component = new MainPageClass(elements);
     return component.create();
 };
+
+export const signupTrigger = (state, cb) => {
+    const signupAnchorElement = document.querySelector('.nav_item_sign-up');
+
+    signupAnchorElement.addEventListener('click', e => {
+        e.preventDefault();
+        state.loadedComponent = 'SignupPage';
+        cb();
+    });
+};
+
+export const homeTrigger = (state, cb) => {
+    const homePageAnchorElement = document.querySelector('.nav_item_home');
+
+    homePageAnchorElement.addEventListener('click', e => {
+        e.preventDefault();
+        state.loadedComponent = 'MainPage';
+        cb();
+    })
+}
 
 const $ = document;
 
@@ -28,15 +48,11 @@ const MainPageClass = class extends Component {
      * @param {Elements} elements 
      */
     constructor(elements) {
-       super(
-            elements,
-            [baseCss, queriesCss]
-        );
+       super(elements);
     }
 
     initialize() {
         try {
-            this.init();
     
             const body = this.elements.body;
             const sectionsTitles = this.elements.external.info.sections.slice(1, 6);
@@ -81,7 +97,7 @@ const MainPageClass = class extends Component {
         const nav_items = $.createElement('ul');
         nav_items.setAttribute('class', 'main__nav__items');
 
-        const nav_items_names = this.elements.external.info.sections;
+        const nav_items_names = this.elements.external.info.sections.slice();
 
         nav_items_names.push('sign up', 'sign in');
         nav_items_names[3] = nav_items_names[6];
@@ -91,7 +107,8 @@ const MainPageClass = class extends Component {
             const li_element = $.createElement('li');
             const li_element_a = $.createElement('a');
 
-            li_element_a.setAttribute('href', '#');
+            li_element_a.setAttribute('href', `/${ item === 'Home' ? '':''.concat(item.toLowerCase().replace(/ /g, '-'))}`);
+            li_element_a.setAttribute('class', `nav_item_${item.toLowerCase().replace(/ /g, '-')}`);
             li_element_a.innerHTML = item;
 
             li_element.insertAdjacentElement('beforeend', li_element_a);
@@ -183,6 +200,9 @@ const MainPageClass = class extends Component {
             PARENTOF, 
             [main_page_div_form_dropdown, main_page_div_form_label]
         );
+
+        // Add to DOMElements
+        Component.addToDOMObject('main_nav', nav);
 
         return;
     }
@@ -573,6 +593,62 @@ const MainPageClass = class extends Component {
     createFooter(parent) {
         const footer = this.createElement('footer');
         this.createRelationship(parent, PARENTOF, [footer]);
+
+        const footer_main_div = this.createElement('div', {
+            class: 'footer__main'
+        });
+
+        const footer_main_nav = this.createElement('div', {
+            class: 'footer__main__nav'
+        });
+
+        const footer_main_nav_items = this.createElement('div', {
+            class: 'footer__main__nav__items'
+        });
+
+        const footer_main_nav_icons = this.createElement('div', {
+            class: 'footer__main__nav__icons'
+        });
+
+        const footer_main_text = this.createElement('p', {
+            class: 'footer__text',
+            innerHTML: ` ${new Date().getFullYear()} Copyright &copy by FootData. All rights reserved.`
+        });
+
+        const footer_items = ['Blog', 'Press', 'IOS App', 'Android App'];
+        const footer_icons = ['ion-social-googleplus', 'ion-social-facebook', 'ion-social-twitter', 'ion-social-instagram', 'ion-social-github'];
+
+        const footer_items_elements = footer_items.map(fi => {
+            const item_p = this.createElement('p', {
+                innerHTML: fi
+            });
+            return item_p;
+        });
+
+        this.createRelationship(footer_main_nav_items, PARENTOF, footer_items_elements);
+
+        const footer_icons_elements = footer_icons.map(fi => {
+            const item_p = this.createElement('a', {
+                href: '',
+                innerHTML: `<i class=${fi}></i>`
+            });
+            return item_p;
+        });
+
+        this.createRelationship(footer_main_nav_icons, PARENTOF, footer_icons_elements);
+
+        this.createRelationship(footer_main_nav,
+            PARENTOF,
+            [footer_main_nav_items, footer_main_nav_icons]
+        );
+
+        this.createRelationship(footer_main_div,
+            PARENTOF,
+            [footer_main_nav, footer_main_text]
+        );
+
+        this.createRelationship(footer, PARENTOF, [footer_main_div]);
+
     }
 
     animate() {
@@ -587,10 +663,13 @@ const MainPageClass = class extends Component {
             worldCompsSection: $.querySelector('.world__comps__section')
         }
 
-        elements.logoElement.classList.add('animated', 'fadeIn');
+        if (this.elements.internal.animate) {
+            elements.logoElement.classList.add('animated', 'fadeIn');
+            elements.navItems.classList.add('animated', 'fadeIn');
+        }
+
         elements.mainPageText.classList.add('animated', 'fadeInUp');
         elements.mainPageForm.classList.add('animated', 'fadeIn');
-        elements.navItems.classList.add('animated', 'fadeIn');
 
         new Waypoint({
             element: elements.worksSection,
