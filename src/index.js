@@ -1,5 +1,6 @@
 import * as MainPage from './components/main_page/MainPage';
 import * as SignupPage from './components/signup_page/SignupPage';
+import * as SigninPage from './components/signin_page/SigninPage';
 import * as MobileNav from './components/mobile_nav/Mobile_Nav';
 import baseCss from './resources/css/style.css';
 import ionicCss from './vendors/css/ionicons.css'
@@ -46,6 +47,9 @@ const MainPageEvent = async () => {
     .then(() => {
         MainPage.homeTrigger(state, loadSinglePage);
         MainPage.signupTrigger(state, loadSinglePage);
+        MainPage.signinTrigger(state, loadSinglePage);
+        MainPage.howItWorksTrigger();
+        MainPage.competitionsTrigger();
     })
     .catch(err => {
         console.log(err);
@@ -54,6 +58,10 @@ const MainPageEvent = async () => {
 
 const SignupPageEvent = async () => {
     SignupPage.startComponent(elements);
+}
+
+const SigninPageEvent = async () => {
+    SigninPage.startComponent(elements);
 }
 
 /****
@@ -76,6 +84,8 @@ const loadSinglePage = () => {
     switch(state.loadedComponent) {
         case 'SignupPage':
             return SignupPageEvent();
+        case 'SigninPage':
+            return SigninPageEvent();
         default: 
             return MainPageEvent();
     };

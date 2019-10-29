@@ -1,0 +1,11 @@
+.signin__container__footer__forgot__pass {
+    padding-top: 20px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: rgb(90, 90, 90);
+    transition: color 0.3s;
+}
+
+.signin__container__footer__forgot__pass:hover {
+    color: rgb(122, 9, 9);
+}

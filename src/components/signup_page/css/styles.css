@@ -1,33 +1,3 @@
-.signup__nav__items li:nth-child(2) a:link,
-.signup__nav__items li:nth-child(2) a:visited {
-    border: 1px solid transparent;
-    padding: 0 0.7rem;
-    border-radius: 10%;
-    background: #e74c3c;
-    -webkit-transition: color 0.3s;
-    transition: color 0.3s;
-}
-
-.signup__nav__items li:nth-child(2) a:hover,
-.signup__nav__items li:nth-child(2) a:active{
-    color: #5c2626;
-}
-
-.signup__nav__items li:nth-child(3) a:link,
-.signup__nav__items li:nth-child(3) a:visited {
-    border: 1px solid #e74c3c;
-    padding: 0 0.8rem;
-    border-radius: 10%;
-    -webkit-transition: background 0.3s;
-    transition: background 0.3s;
-}
-
-.signup__nav__items li:nth-child(3) a:hover,
-.signup__nav__items li:nth-child(3) a:active{
-    background: #e74c3c;
-}
-
-
 /*****
     SIGNUP CONTAINER
 *****/
@@ -35,11 +5,12 @@
 .signup__container {
     text-align: center;
     background: #fff;
-    width: 25%;
+    width: 15%;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     padding-bottom: 25px;
+    margin-top: 70px
 }
 
 .signup__container__header {
@@ -47,6 +18,7 @@
     align-items: center;
     background: #e71515ce;
     color: #fff;
+    cursor: pointer;
 }
 
 .signup__container__header p {
@@ -78,8 +50,6 @@
 	flex-direction: column;
 }
 
-
-
 .signup_container_form_item {
     display: flex;
     align-items: center;
@@ -90,8 +60,34 @@
     padding: 0 5px;
 }
 
+.signup_container_form_item:nth-child(2) i {
+    font-size: 110%;
+}
+
 .signup_container_form_item input {
     padding-left: 3px;
+    cursor: pointer;
+}
+
+.signup__container__body__form__terms {
+    display: flex;
+    align-items: center;
+    padding-left: 17px;
+}
+
+.signup__container__submit__btn {
+	width: 100%;
+	display: flex;
+	background: #f1c40f;
+	border-radius: 5px;
+    padding-left: 55px;
+    color: #fff;
+    transition: color 0.4s;
+}
+
+.signup__container__submit__btn:hover {
+    color: #000;
+    cursor: pointer;
 }
 
 .signup__container__body__footer {
@@ -123,13 +119,12 @@
 
 .signup__container__footer__items div {
     flex: 0.5;
-    background:#c0392b;
+    background: #c0392b;
     height: auto;
-    padding: 3px 15px;
-    align-items: center;
     padding-bottom: 5px;
+    align-items: center;
     border-radius: 2px;
-    margin: 0 10px;
+    margin: 5px 15px;
 }
 
 .signup__container__footer__items div i {

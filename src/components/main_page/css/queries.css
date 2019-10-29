@@ -90,6 +90,11 @@
         background-size: auto;
     }
 
+    .about__images {
+        flex-direction: column;
+        padding: 40px;
+    }
+
 }
 
 /* Small phones: from 0 to 480px */

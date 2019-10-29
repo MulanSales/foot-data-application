@@ -8,6 +8,9 @@ import logoImage from '../../resources/img/logo.png';
 import playerImage from '../../resources/img/player.png';
 import worldMapImage from '../../resources/img/world-map.png';
 import cr7Image from './img/player3.jpg';
+import fronLogo from './img/frontlogo.png';
+import mongoLogo from './img/mongologo.png';
+import nodeLogo from './img/node-logo.jpg';
 
 import '../../vendors/js/noframework.waypoints';
 
@@ -21,7 +24,7 @@ export const startComponent = elements => {
 };
 
 export const signupTrigger = (state, cb) => {
-    const signupAnchorElement = document.querySelector('.nav_item_sign-up');
+    const signupAnchorElement = $.querySelector('.nav_item_sign-up');
 
     signupAnchorElement.addEventListener('click', e => {
         e.preventDefault();
@@ -30,8 +33,18 @@ export const signupTrigger = (state, cb) => {
     });
 };
 
+export const signinTrigger = (state, cb) => {
+    const signinAnchorElement = $.querySelector('.nav_item_sign-in');
+
+    signinAnchorElement.addEventListener('click', e => {
+        e.preventDefault();
+        state.loadedComponent = 'SigninPage';
+        cb();
+    });
+};
+
 export const homeTrigger = (state, cb) => {
-    const homePageAnchorElement = document.querySelector('.nav_item_home');
+    const homePageAnchorElement = $.querySelector('.nav_item_home');
 
     homePageAnchorElement.addEventListener('click', e => {
         e.preventDefault();
@@ -40,6 +53,25 @@ export const homeTrigger = (state, cb) => {
     })
 }
 
+export const howItWorksTrigger = () => {
+    const howItWorksAnchorElement = $.querySelector('.nav_item_how-it-works');
+    
+    howItWorksAnchorElement.addEventListener('click', e => {
+        e.preventDefault();
+        const worksSection = $.querySelector('.works__section');
+        worksSection.scrollIntoView({behavior: 'smooth', block: 'start'});
+    });
+}
+
+export const competitionsTrigger = () => {
+    const competitionsAnchorElement = $.querySelector('.nav_item_world-competitions');
+    
+    competitionsAnchorElement.addEventListener('click', e => {
+        e.preventDefault();
+        const worksSection = $.querySelector('.world__comps__section');
+        worksSection.scrollIntoView({behavior: 'smooth', block: 'start'});
+    });
+}
 const $ = document;
 
 const MainPageClass = class extends Component {
@@ -61,7 +93,7 @@ const MainPageClass = class extends Component {
             this.createSection(body, sectionsTitles[1], 'world__comps__section', this.createWorldCompetitionsContent);
             this.createSection(body, sectionsTitles[2], 'players__details__section', this.createPlayerDetailsContent);
             this.createSection(body, sectionsTitles[4], 'customers__reviews', this.createCustomerReviewsSection);
-            this.createSection(body, sectionsTitles[3], 'about__section', (param) => {return;});
+            this.createSection(body, sectionsTitles[3], 'about__section', this.createAboutSection);
             this.createFooter(body);
             
             this.animate();
@@ -586,8 +618,36 @@ const MainPageClass = class extends Component {
         );
     }
 
-    createAboutContent() {
+    createAboutSection(parent) {
 
+        const about_main_div = this.createElement('div', {
+            class: 'about__main'
+        });
+
+        const about_images_div = this.createElement("div", {
+            class: 'about__images'
+        });
+
+        const about_images = [fronLogo, mongoLogo, nodeLogo];
+
+        about_images.forEach(ai => {
+            const about_image = this.createElement('img', {
+                src: `${ai}`,
+                class: 'about__image'
+            })
+
+            this.createRelationship(about_images_div, PARENTOF, [about_image]);
+        });
+
+        const about_main_text = this.createElement('p', {
+            innerHTML: this.elements.external.info.about[2]
+        });
+
+        this.createRelationship(about_main_div, PARENTOF, [
+            about_images_div, about_main_text
+        ]);
+
+        this.createRelationship(parent, PARENTOF, [about_main_div]);
     }
 
     createFooter(parent) {

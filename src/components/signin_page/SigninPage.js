@@ -8,18 +8,18 @@ import '../../vendors/js/noframework.waypoints';
 
 /**
  * @param {Object} elements 
- * @returns {Promise<SignupPageClass>}
+ * @returns {Promise<SigninPageClass>}
  */
 export const startComponent = elements => {
-    const component = new SignupPageClass(elements);
+    const component = new SigninPageClass(elements);
     return component.create();
 };
 
 const $ = document;
 
-const SignupPageClass = class extends Component {
+const SigninPageClass = class extends Component {
     /**
-     * SignupPage constructor
+     * SigninPage constructor
      */
     constructor(elements) {
         super(elements);
@@ -30,7 +30,7 @@ const SignupPageClass = class extends Component {
         const body = this.elements.body;
 
         const header = this.createHeader(body);
-        this.createSignupContainer(header);
+        this.createSigninContainer(header);
         this.animate();
 
     }
@@ -65,22 +65,22 @@ const SignupPageClass = class extends Component {
     }
 
     /**
-     * Create Signup Container 
+     * Create Signin Container 
      * @param {Element} parent 
      */
-    createSignupContainer(parent) {
+    createSigninContainer(parent) {
 
         const signup_container = this.createElement('div', {
             class: 'signup__container'
         });
 
-        // Signup container header elements
+        // Signin container header elements
         const signup_container_header = this.createElement('div', {
             class: 'signup__container__header'
         });
 
         const signup_container_header_title = this.createElement('p', {
-            innerHTML: 'sign up'
+            innerHTML: 'login'
         });
 
         const signup_container_header_close_i = this.createElement('i', {
@@ -91,15 +91,15 @@ const SignupPageClass = class extends Component {
             signup_container_header_title, signup_container_header_close_i
         ]);
     
-        // Signup container body elements
+        // Signin container body elements
         const signup_container_body = this.createElement('div', {
             class: 'signup__container__body'
         });
     
         const signup_container_body_text = this.createElement('p', {
             innerHTML: `
-               Welcome to FootData. Please enter your <span style='color: #8e44ad;'>Registration</span> details. Or have
-               an account Login <a href='/sign-in' style='color: #8e44ad;'><span>here</span></a>
+               Welcome to FootData. Please enter your <span style='color: #8e44ad;'>Login</span> details to login here. Or register
+               an account <a href='/sign-in' style='color: #8e44ad;'><span>here</span></a>
             `
         });
 
@@ -107,8 +107,8 @@ const SignupPageClass = class extends Component {
             class: 'signup__container__body__form'
         });
 
-        const formItems = ['User Name', 'Email', 'Password', 'Password Confirmation'];
-        const formIcons = ['ion-ios-person', 'ion-android-mail', 'ion-ios-unlocked', 'ion-ios-locked'];
+        const formItems = ['User Name', 'Password'];
+        const formIcons = ['ion-ios-person', 'ion-ios-unlocked'];
 
         for (const [index, value] of formItems.entries()) {
 
@@ -117,6 +117,7 @@ const SignupPageClass = class extends Component {
             })
 
             const signup_container_form_item_i = this.createElement('i', {
+                style: 'font-size: 160%',
                 class: formIcons[index]
             });
 
@@ -141,8 +142,9 @@ const SignupPageClass = class extends Component {
             type: 'checkbox'
         });
 
+
         const signup_container_form_terms_text = this.createElement('p', {
-            innerHTML: 'I accept the terms'
+            innerHTML: 'Remember me'
         });
 
         this.createRelationship(signup_container_form_terms, PARENTOF, [
@@ -151,7 +153,7 @@ const SignupPageClass = class extends Component {
 
         const signup_container_submit_btn = this.createElement('buttom', {
             class: 'signup__container__submit__btn',
-            innerHTML: 'Sign up'
+            innerHTML: 'Sign in'
         })
 
         this.createRelationship(signup_container_body_form_div, PARENTOF, [
@@ -162,13 +164,13 @@ const SignupPageClass = class extends Component {
             signup_container_body_text, signup_container_body_form_div
         ]);
 
-        // Signup container footer
+        // Signin container footer
         const signup_container_body_footer = this.createElement('div', {
             class: 'signup__container__body__footer'
         });
 
         const signup_container_body_footer_p = this.createElement('p', {
-            innerHTML: 'Signup with your Facebook or Gmail' 
+            innerHTML: 'Login with your Facebook or Gmail' 
         });
 
         const signup_container_footer_items = this.createElement('div', {
@@ -201,8 +203,13 @@ const SignupPageClass = class extends Component {
 
         });
 
+        const signin_container_footer_forgot_pass = this.createElement('a', {
+            class: 'signin__container__footer__forgot__pass',
+            innerHTML: 'Forgot Password'
+        });
+
         this.createRelationship(signup_container_body_footer, PARENTOF, [
-            signup_container_body_footer_p, signup_container_footer_items
+            signup_container_body_footer_p, signup_container_footer_items, signin_container_footer_forgot_pass
         ]);
 
         this.createRelationship(signup_container, PARENTOF, [

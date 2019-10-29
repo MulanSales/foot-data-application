@@ -70,8 +70,8 @@ header {
             flex: 0.75;
 }
 
-.main__nav__items li:nth-child(4) a:link,
-.main__nav__items li:nth-child(4) a:visited  {
+.main__nav__items li:nth-last-child(1) a:link,
+.main__nav__items li:nth-last-child(1) a:visited  {
     border: 1px solid transparent;
     padding: 0 0.7rem;
     border-radius: 10%;
@@ -80,13 +80,13 @@ header {
     transition: color 0.3s;
 }
 
-.main__nav__items li:nth-child(4) a:hover,
-.main__nav__items li:nth-child(4) a:active{
+.main__nav__items li:nth-last-child(1) a:hover,
+.main__nav__items li:nth-last-child(1) a:active{
     color: #5c2626;
 }
 
-.main__nav__items li:nth-child(5) a:link,
-.main__nav__items li:nth-child(5) a:visited {
+.main__nav__items li:nth-last-child(2) a:link,
+.main__nav__items li:nth-last-child(2) a:visited {
     border: 1px solid #e71515a8;
     padding: 0 0.8rem;
     border-radius: 10%;
@@ -94,8 +94,8 @@ header {
     transition: background 0.3s;
 }
 
-.main__nav__items li:nth-child(5) a:hover,
-.main__nav__items li:nth-child(5) a:active{
+.main__nav__items li:nth-last-child(2) a:hover,
+.main__nav__items li:nth-last-child(2) a:active{
     background: #e74c3c;
 }
 
@@ -515,7 +515,6 @@ header {
     background-image:  linear-gradient(rgba(0, 0, 0, 0.801), rgba(0, 0, 0, 0.767)), url('../img//back-3.jpg');
     background-size: cover;
     background-attachment: fixed;
-    padding-bottom: 100px
 }
 
 .customers__reviews h2, 
@@ -524,7 +523,7 @@ header {
 }
 
 .customers__main__div {
-    height: 40vh;
+    height: 35vh;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -532,7 +531,6 @@ header {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    background-attachment: fixed;
     margin-top: 2rem;
     padding: 0 150px;
 }
@@ -583,6 +581,35 @@ header {
 	color: #fff;
     font-size: 90%;
     padding: 0 1rem;
+}
+
+/*----------------------------------------------------- */
+/* ABOUT
+/*----------------------------------------------------- */
+
+.about__main {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	align-content: center;
+	padding-bottom: 10px;
+}
+
+.about__main p {
+    width: 60%;
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.about__images {
+	display: flex;
+	align-items: center;
+}
+
+.about__images img {
+    z-index: 1;
+    width: 200px;
+    padding: 0 15px;
 }
 
 /*----------------------------------------------------- */
