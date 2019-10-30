@@ -2,19 +2,25 @@ import * as MainPage from './components/main_page/MainPage';
 import * as SignupPage from './components/signup_page/SignupPage';
 import * as SigninPage from './components/signin_page/SigninPage';
 import * as MobileNav from './components/mobile_nav/Mobile_Nav';
+import * as DashBoardPage from './components/dashboard_page/DashBoardPage';
 import baseCss from './resources/css/style.css';
 import ionicCss from './vendors/css/ionicons.css'
 import animateCss from './vendors/css/animate.css';
 
 import Info from './models/Info';
 import { Component } from './components/lib/Component';
+import Competitions from './models/Competitions';
 
 /**** Global state of the app
  * @var {Object} state
  * @var {Array} loadedComponent
  */
 const state = {
-    loadedComponent: ''
+    loadedComponent: '',
+    searchQuery: {
+        inputValue: '',
+        inputCategory: ''
+    }
 };
 
 /*** Elements of the initial page
@@ -48,6 +54,8 @@ const MainPageEvent = async () => {
         MainPage.homeTrigger(state, loadSinglePage);
         MainPage.signupTrigger(state, loadSinglePage);
         MainPage.signinTrigger(state, loadSinglePage);
+        MainPage.searchTrigger(state, loadSinglePage);
+        MainPage.dropDownTrigger();
         MainPage.howItWorksTrigger();
         MainPage.competitionsTrigger();
     })
@@ -62,6 +70,26 @@ const SignupPageEvent = async () => {
 
 const SigninPageEvent = async () => {
     SigninPage.startComponent(elements);
+}
+
+const DashBoardEvent = async () => {
+    DashBoardPage.startComponent(elements)
+    .then(() => {
+        if (state.searchQuery.inputCategory === 'CMP') {
+            const competitions = new Competitions(state.searchQuery.inputValue);
+            return competitions.fetchCompetitions();
+        }
+    })
+    .then(result => {
+        const queryObject = {
+            searchQuery: state.searchQuery,
+            res: result
+        };
+
+        DashBoardPage.createCarousel(elements.body, queryObject);
+
+        DashBoardPage.homeLogoTrigger(state, loadSinglePage);
+    });
 }
 
 /****
@@ -86,6 +114,8 @@ const loadSinglePage = () => {
             return SignupPageEvent();
         case 'SigninPage':
             return SigninPageEvent();
+        case 'DashBoardPage':
+            return DashBoardEvent();
         default: 
             return MainPageEvent();
     };

@@ -1,0 +1,210 @@
+/************************************
+* BODY ELEMENTS
+*************************************/
+
+.dashboard-page {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.900), rgba(0, 0, 0, 0.970)), url('../img/back-1.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+/************************************
+* NAV ELEMENTS
+*************************************/
+
+.dash__nav {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #131313;
+	box-shadow: 1px 1px black;
+}
+
+.dash__nav__logo {
+    flex: 0.95;
+    padding-left: 20px;
+}
+
+.dash__nav__logo img {
+    width: 100px;
+}
+
+.dash__nav__items {
+    display: flex;
+    list-style: none;
+    align-items: center;
+    cursor: pointer;
+}
+
+.dash__nav__items li {
+    color: #fff;
+    padding: 0 15px;
+    font-size: 110%;
+    border-bottom: 2px solid transparent;
+    transition: color 1s
+}
+
+.dash__nav__items li a:hover,
+.dash__nav__items li a:active{
+    color: #e74c3c
+}
+.dash__nav__user {
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+}
+
+.dash__nav__user i {
+    color: #fff;
+}
+
+.dash__nav__user i:first-child {
+    color: #fff;
+    font-size: 250%;
+}
+
+.dash__nav__user--info__div {
+    display: flex;
+    flex-direction: column;
+}
+
+.dash__nav__user--info__div p {
+    color: #fff;
+    font-size: 80%;
+}
+
+/************************************
+* SEARCH CONTAINER ELEMENTS
+*************************************/
+
+.search__container {
+	text-align: center;
+    padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search__container__main {
+    display: flex;
+    align-items: center;
+}
+
+.search__input {
+    width: 550px;
+    height: 30px;
+    border-radius: 1px;
+    background: #2f2f2f;
+    color: #fff;
+    padding-left: 10px;
+    border: 1px solid #373535;
+}
+
+.dash__btn {
+    border: none;
+}
+
+.search__menu {
+    margin-top: -15px;
+}
+
+.search__menu ul {
+    list-style: none;
+    background: none;
+    padding-top: 10px;
+}
+
+.search__menu ul li p {
+    color: #fff;
+    font-size: 75%;
+}
+
+.search__select__div p {
+	color: #fff;
+	font-size: 80%;
+	margin-bottom: -10px;
+}
+
+.search__select__icon {
+    display: block;
+}
+
+.search__select__div i:hover {
+    cursor: pointer;
+    color: #e74c3c;
+}
+
+/************************************
+* CAROUSEL ELEMENTS
+*************************************/
+
+.dash__carousel__container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.dash__logo__img:hover {
+    cursor: pointer;
+}
+
+.dash__carousel__container h1 {
+    color: #fff;
+    font-size: 150%;
+    font-weight: 500;
+    padding: 3px 15px;
+}
+
+.query__container {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    padding: 0 20px;
+}
+
+.query__container__item {
+	color: #fff;
+	display: flex;
+	align-items: center;
+	border-radius: 20px;
+	padding: 0 15px;
+	background: #171717;
+    width: 250px;
+    margin-left: 15px;
+    transition: background 0.3s;
+}
+
+.query__container__item:hover {
+    background: rgb(136, 136, 136);
+    cursor: pointer;
+}
+
+.query__container__item span {
+	border-radius: 5px;
+	padding: 5px 5px;
+	font-size: 100%;
+	font-family: inherit;
+}
+
+.query__container__item__content {
+    font-size: 70%;
+}
+
+.query__container__item__content p:first-child {
+    color: #fff;
+}
+
+.query__container__item__content p:last-child {
+    color: #4e4;
+}
+
+.query__container i {
+    font-size: 250%;
+    padding: 0 15px;
+    margin-top: 5px;
+    transition: color 0.3s;
+}
+
+.query__container i:hover {
+    color: #e74c3c;
+    cursor: pointer;
+}

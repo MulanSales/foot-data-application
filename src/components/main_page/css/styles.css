@@ -170,6 +170,7 @@ header {
 	padding: 0 0.2rem;
     background: rgba(189, 186, 186, 0.884);
     font-size: 90%;
+    font-style: inherit;
 }
 
 .dropdown-content {
@@ -181,9 +182,10 @@ header {
     background: #ffF;
     z-index: 1;
     transition: display 0.3s;
+    cursor: pointer;
 }
 
-.dropdown-content a {
+.dropdown-content a{
     text-decoration: none;
     text-align: center;
     padding: 0.5rem;

@@ -20,6 +20,8 @@ export const Component = class {
     constructor(elements, paths) {
         this.elements = elements;
         this.paths = paths;
+        this.CE = this.createElement;
+        this.CR = this.createRelationship;
     }
 
     /**
@@ -111,6 +113,11 @@ export const Component = class {
 
         if (body) {
             body.innerHTML = '';
+            if (body.classList.length > 0) {
+                Array.from(body.classList).forEach(c => {
+                    body.classList.remove(c);
+                })
+            }
         }
 
         if (head) {

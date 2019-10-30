@@ -72,6 +72,51 @@ export const competitionsTrigger = () => {
         worksSection.scrollIntoView({behavior: 'smooth', block: 'start'});
     });
 }
+
+export const dropDownTrigger = () => {
+    const dropDownContentDiv = $.querySelector('.dropdown-content');
+    const dropBtnI = $.querySelector('.ion-android-arrow-dropdown');
+    const mainPageFormInputPlaceholder = $.querySelector('.main__page__form__input');
+
+    const placeholderTextItems = {
+        CMP: 'competition', PLR: 'player', TM: 'team'
+    };
+
+    Array.from(dropDownContentDiv.children).forEach(ddc => {
+        ddc.addEventListener('click', e => {
+            e.preventDefault();
+            dropBtnI.innerHTML = ddc.innerHTML;
+            mainPageFormInputPlaceholder.placeholder = `Insert a ${placeholderTextItems[ddc.innerHTML]} to search...`
+        });
+    });
+
+};
+
+export const searchTrigger = (state, cb) => {
+    const searchBtnElement = $.querySelector('.search__btn');
+    const pageForm = $.querySelector('.main__page__form');
+
+    const commonFunc = event => {
+        event.preventDefault();
+        state.loadedComponent = 'DashBoardPage';
+        state.searchQuery = {
+            inputValue: $.querySelector('.main__page__form__input').value,
+            inputCategory: $.querySelector('.ion-android-arrow-dropdown').innerHTML
+        }
+        cb();
+    };
+
+    searchBtnElement.addEventListener('click', e => {
+        commonFunc(e);
+    });
+
+    pageForm.addEventListener('keypress', e => {
+        if (e.keyCode === 13) {
+            commonFunc(e);
+        }
+    })
+}
+
 const $ = document;
 
 const MainPageClass = class extends Component {
@@ -164,6 +209,7 @@ const MainPageClass = class extends Component {
 
         const main_page_div_form_input = $.createElement('input');
         main_page_div_form_input.setAttribute('type', 'search');
+        main_page_div_form_input.setAttribute('class', 'main__page__form__input');
         main_page_div_form_input.setAttribute('name', 'search');
         main_page_div_form_input.setAttribute('placeholder', 'Insert a competition to search');
 
@@ -212,7 +258,6 @@ const MainPageClass = class extends Component {
 
         dropdown_items.forEach(di => {
             const dropdown_item_a = this.createElement('a', {
-                href: '/',
                 innerHTML: di
             });
             

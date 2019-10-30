@@ -1,9 +1,13 @@
+import Model from "./Model";
 
-export default class Info {
-    constructor() {}
+export default class Info extends Model {
+    constructor() {
+        super();
+    }
 
-    fetchResources() {
-        const url = 'https://foot-data-api.herokuapp.com/';
+    async fetchResources() {
+       
+        const url = this.url;
         return fetch(`${url}v1/info`, {
             method: 'GET',
             headers: {'Content-Type': 'application/json'}
