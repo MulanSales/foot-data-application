@@ -75,6 +75,9 @@
 /************************************
 * SEARCH CONTAINER ELEMENTS
 *************************************/
+.search__select__div {
+    display: none;
+}
 
 .search__container {
 	text-align: center;
@@ -151,7 +154,8 @@
     color: #fff;
     font-size: 150%;
     font-weight: 500;
-    padding: 3px 15px;
+    padding: 0 15px;
+    padding-bottom: 10px;
 }
 
 .query__container {
@@ -159,6 +163,7 @@
     align-items: center;
     align-content: center;
     padding: 0 20px;
+    margin-left: 50px;
 }
 
 .query__container__item {
@@ -168,9 +173,10 @@
 	border-radius: 20px;
 	padding: 0 15px;
 	background: #171717;
-    width: 250px;
+    width: 240px;
     margin-left: 15px;
     transition: background 0.3s;
+    height: 100%
 }
 
 .query__container__item:hover {
@@ -199,9 +205,13 @@
 
 .query__container i {
     font-size: 250%;
-    padding: 0 15px;
     margin-top: 5px;
     transition: color 0.3s;
+    padding-bottom: 10px;
+}
+
+.query__container i:last-child {
+    padding-left: 15px;
 }
 
 .query__container i:hover {

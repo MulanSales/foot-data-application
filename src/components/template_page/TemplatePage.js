@@ -21,7 +21,7 @@ const TemplateClass = class extends Component {
      * @param {Elements} elements 
      */
     constructor(elements) {
-        super(elements, [baseCss, queriesCss]);
+        super(elements);
     }
 
     initialize() {

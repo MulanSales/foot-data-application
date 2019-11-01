@@ -1,15 +1,15 @@
+import { Component } from './components/lib/Component';
 import * as MainPage from './components/main_page/MainPage';
 import * as SignupPage from './components/signup_page/SignupPage';
 import * as SigninPage from './components/signin_page/SigninPage';
 import * as MobileNav from './components/mobile_nav/Mobile_Nav';
 import * as DashBoardPage from './components/dashboard_page/DashBoardPage';
-import baseCss from './resources/css/style.css';
-import ionicCss from './vendors/css/ionicons.css'
-import animateCss from './vendors/css/animate.css';
+import * as CompetitionBoard from './components/competitions_board/CompetitonsBoard';
+import * as ErrorModal from './components/error_modal/ErrorModal';
 
 import Info from './models/Info';
-import { Component } from './components/lib/Component';
 import Competitions from './models/Competitions';
+import Competition from './models/Competition';
 
 /**** Global state of the app
  * @var {Object} state
@@ -20,7 +20,8 @@ const state = {
     searchQuery: {
         inputValue: '',
         inputCategory: ''
-    }
+    },
+    error: ''
 };
 
 /*** Elements of the initial page
@@ -87,8 +88,28 @@ const DashBoardEvent = async () => {
         };
 
         DashBoardPage.createCarousel(elements.body, queryObject);
-
         DashBoardPage.homeLogoTrigger(state, loadSinglePage);
+        DashBoardPage.carouselNavigationTrigger(queryObject);
+
+        if (result.get().length > 0) {
+            if (state.searchQuery.inputCategory === 'CMP') {
+                const competition = new Competition(result.get()[0].id);
+
+                return competition.fetchCompetition()
+                .then(result => {
+
+                    if (result.name) {
+                        elements.external.competition = result;
+                        CompetitionBoard.startComponent(elements);
+                    } else {
+                        // Display modal of error
+                        elements.external.error = `Can't found requested resource`;
+                        ErrorModal.startComponent(elements);
+                        ErrorModal.modalCallTrigger(elements.body);
+                    }
+                }); 
+            }
+        }
     });
 }
 

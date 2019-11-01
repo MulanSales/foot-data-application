@@ -25,16 +25,70 @@ export const homeLogoTrigger = async (state, cb) => {
         state.loadedComponent = 'MainPage';
         cb();
     })
+};
+
+export const carouselNavigationTrigger = async (query) => {
+
+    if (query.res.competitions.length < 6) { return; }
+
+    const dash_carousel_arrow = $.querySelector('.dash__carousel__arrow');
+
+    const dash_carousel_arrow_back = $.querySelector('.dash__carousel__arrow__back');
+
+    const query_container_items = $.querySelectorAll('.query__container__item');
+
+    dash_carousel_arrow.addEventListener('click', () => {
+
+        dash_carousel_arrow_back.style.display = 'flex';
+
+        const container_display_none = Array.from(query_container_items).slice(4, query_container_items.length).find(qci => {
+            return qci.style.display === 'none';
+        });
+
+        container_display_none.style.display = 'flex';
+
+        const container_display_block = Array.from(query_container_items).find(qci => {
+            return qci.style.display !== 'none';
+        });
+
+        container_display_block.style.display = 'none';
+
+        if (query_container_items[query_container_items.length-1].style.display === 'flex') {
+            dash_carousel_arrow.style.display = 'none';
+            return;
+        }
+    });
+
+    dash_carousel_arrow_back.addEventListener('click', () => {
+        dash_carousel_arrow.style.display = 'flex';
+
+        const container_display_none = Array.from(query_container_items).reverse().slice(4, query_container_items.length).find(qci => {
+            return qci.style.display === 'none';
+        });
+
+        container_display_none.style.display = 'flex';
+
+        const container_display_block = Array.from(query_container_items).reverse().find(qci => {
+            return qci.style.display !== 'none';
+        });
+
+        container_display_block.style.display = 'none';
+
+        if (query_container_items[0].style.display === 'flex') {
+            dash_carousel_arrow_back.style.display = 'none';
+            return;
+        }
+    })
 }
 
 export const createCarousel = async (parent, query) => {
 
     let query_container_item = '';
-
+    let carouselIndex = 1;
     if (query.searchQuery.inputCategory === 'CMP') {
         query.res.competitions.forEach(c => {
             query_container_item = query_container_item.concat(`
-                <div class='query__container__item'>
+                <div class='query__container__item item--${carouselIndex}' ${carouselIndex > 6 ? 'style=display:none' : ''}>
                     <span style='background: linear-gradient(to left, ${getRandomColor()}, ${getRandomColor()})'>${parseIconText(c.name)}</span>
                     <div class='query__container__item__content'>
                         <p>${c.name}</p>
@@ -42,6 +96,7 @@ export const createCarousel = async (parent, query) => {
                     </div>
                 </div>
             `);
+            carouselIndex++;
         });
     };
 
@@ -54,8 +109,10 @@ export const createCarousel = async (parent, query) => {
     const dash_carousel_container = `
         <div class='dash__carousel__container'>
             <h1>${carouselTitle}</h1>
-            <div class='query__container'>${query_container_item}
-                <i class='ion-android-arrow-dropright-circle'></i>
+            <div class='query__container'>
+                <i class='ion-android-arrow-dropleft-circle dash__carousel__arrow__back' style='display:none'></i>
+                ${query_container_item}
+                ${carouselIndex > 6 ? `<i class='ion-android-arrow-dropright-circle dash__carousel__arrow'></i>` : ''}
             </div>
         </div>
     `;

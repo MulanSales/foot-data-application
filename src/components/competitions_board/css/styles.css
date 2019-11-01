@@ -1,0 +1,34 @@
+.competitions__matches__container {
+	display: flex;
+	flex-direction: column;
+    margin: 15px 20px;
+}
+
+.competitions__matches__container h1 {
+    font-size: 130%;
+    color: #fff;
+}
+
+.competitions__matches_items {
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid #8080800a;
+	border-radius: 20px;
+	width: 45%;
+	background: #111010;
+	padding: 10px 10px;
+}
+
+.competitions__match__item {
+    display: flex;
+    align-items: center;
+}
+
+.competitions__match__item p {
+    color: #fff;
+}
+
+.competitions__match__item i{
+    padding: 0px 10px;
+}
